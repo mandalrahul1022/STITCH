@@ -1,0 +1,234 @@
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&display=swap");
+
+:root {
+  --bg-primary: #050812;
+  --bg-panel: rgba(7, 13, 26, 0.82);
+  --border-glow: rgba(124, 190, 255, 0.3);
+  --accent: #36a4ff;
+  --accent-2: #f77ef1;
+  --text-muted: #9bb0c6;
+}
+
+body {
+  font-family: "Space Grotesk", "Segoe UI", sans-serif;
+  color: #f2f6ff;
+  background: radial-gradient(circle at top, rgba(19, 48, 93, 0.6), transparent),
+    linear-gradient(135deg, #050812 0%, #080c1b 45%, #05070c 100%);
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+}
+
+#stellar-backdrop,
+#stellar-backdrop .stars,
+#stellar-backdrop .twinkles {
+  pointer-events: none;
+}
+
+#stellar-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  overflow: hidden;
+  perspective: 800px;
+}
+
+#stellar-backdrop .stars,
+#stellar-backdrop .twinkles {
+  position: absolute;
+  inset: 0;
+  background-repeat: repeat;
+}
+
+#stellar-backdrop .stars {
+  background-image: radial-gradient(1px 1px at 20px 30px, rgba(255, 255, 255, 0.5), transparent),
+    radial-gradient(1px 1px at 80px 120px, rgba(255, 255, 255, 0.4), transparent),
+    radial-gradient(2px 2px at 50px 80px, rgba(255, 255, 255, 0.35), transparent);
+  background-size: 120px 120px;
+  animation: drift 60s linear infinite;
+}
+
+#stellar-backdrop .twinkles {
+  background-image: radial-gradient(2px 2px at 10px 10px, rgba(54, 164, 255, 0.9), transparent),
+    radial-gradient(2px 2px at 60px 40px, rgba(247, 126, 241, 0.9), transparent),
+    radial-gradient(2px 2px at 90px 110px, rgba(255, 255, 255, 0.8), transparent);
+  background-size: 140px 140px;
+  animation: twinkle 4s ease-in-out infinite alternate;
+  mix-blend-mode: screen;
+}
+
+@keyframes drift {
+  from {
+    transform: translateZ(-200px) translateY(0);
+  }
+  to {
+    transform: translateZ(-200px) translateY(-120px);
+  }
+}
+
+@keyframes twinkle {
+  from {
+    opacity: 0.2;
+    transform: translateZ(-100px) scale(1);
+  }
+  to {
+    opacity: 0.8;
+    transform: translateZ(-50px) scale(1.4);
+  }
+}
+
+.navbar {
+  background: rgba(5, 8, 18, 0.65) !important;
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border-glow);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+}
+
+.container {
+  max-width: 1200px;
+}
+
+#sidebar,
+#elements {
+  background: var(--bg-panel);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 22px;
+  padding: 24px;
+  margin-bottom: 2rem;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(18px);
+}
+
+#elements-topbar {
+  background: rgba(0, 0, 0, 0.45);
+  border-radius: 16px;
+  padding: 10px 18px;
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  margin-bottom: 1rem;
+}
+
+.navbar .nav-link,
+.navbar-brand {
+  color: #f8fbff !important;
+  letter-spacing: 0.04em;
+}
+
+.lead {
+  width: 100%;
+  margin: 0;
+}
+
+.insights-panel {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.metric-card {
+  padding: 16px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: linear-gradient(145deg, rgba(12, 20, 40, 0.85), rgba(6, 12, 25, 0.8));
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+  position: relative;
+}
+
+.metric-card.highlight {
+  border-color: rgba(54, 164, 255, 0.5);
+  box-shadow: 0 15px 35px rgba(54, 164, 255, 0.2);
+}
+
+.metric-card.subtle {
+  opacity: 0.85;
+}
+
+.metric-card h6 {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+}
+
+.metric-value {
+  font-size: 2.4rem;
+  font-weight: 600;
+  line-height: 1.1;
+}
+
+.metric-subtitle {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.metric-subtitle.trend-up {
+  color: #36ff9f;
+}
+.metric-subtitle.trend-down {
+  color: #ff6b7a;
+}
+
+.comparison-panel {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+}
+
+.comparison-card {
+  padding: 16px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(4, 8, 18, 0.7);
+}
+
+.comparison-card h5 {
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin-bottom: 0.8rem;
+  color: #e2edff;
+}
+
+.comparison-card ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.comparison-card li {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.35rem 0;
+  font-weight: 500;
+  color: #f0f6ff;
+}
+
+.comparison-card li span {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+#elements canvas,
+#elements svg {
+  border-radius: 18px;
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  padding: 8px;
+}
+
+.navbar .nav-link:hover {
+  color: var(--accent) !important;
+}
+
+@media (max-width: 992px) {
+  .container.d-flex {
+    flex-direction: column;
+  }
+  #sidebar,
+  #elements {
+    width: 100%;
+  }
+}

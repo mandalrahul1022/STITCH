@@ -1,0 +1,6 @@
+mesa==1.2.1
+networkx==3.5
+matplotlib==3.10.7
+pandas==2.3.3
+ipywidgets==8.1.8
+seaborn==0.13.2
