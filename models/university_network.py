@@ -63,6 +63,7 @@ class ComputerAgent(Agent):
         self.state = HealthState.EXPOSED
         self.incubation_timer = self.model.draw_incubation_period()
         self.model.daily_new_exposed += 1
+        self.model.total_ever_exposed += 1
 
     def recover(self) -> None:
         """Transition the agent to the Recovered state."""
@@ -151,12 +152,14 @@ class UniversityNetwork(Model):
         self.daily_new_exposed: int = 0
         self.daily_new_infected: int = 0
         self.daily_patched: int = 0
+        self.total_ever_exposed: int = 0
         self.datacollector = DataCollector(
             model_reporters={
                 "Susceptible": lambda model: model.count_state(HealthState.SUSCEPTIBLE),
                 "Exposed": lambda model: model.count_state(HealthState.EXPOSED),
                 "Infected": lambda model: model.count_state(HealthState.INFECTED),
                 "Recovered": lambda model: model.count_state(HealthState.RECOVERED),
+                "CumulativeExposed": lambda model: model.total_ever_exposed,
                 "NewExposed": lambda model: model.daily_new_exposed,
                 "NewInfected": lambda model: model.daily_new_infected,
                 "Patched": lambda model: model.daily_patched,
@@ -259,15 +262,37 @@ class UniversityNetwork(Model):
             return
 
         if self.patching_strategy == "Targeted":
-            # Hub-first: sort descending by node degree to patch the most connected nodes first.
-            infected_agents.sort(key=lambda agent: self.graph.degree[agent.unique_id], reverse=True)
-            selected = infected_agents[:num_to_patch]
+            selected = self.identify_propagation_hubs(infected_agents, num_to_patch)
         else:
             selected = self.random.sample(infected_agents, num_to_patch)
 
         for agent in selected:
             agent.recover()
             self.daily_patched += 1
+
+    def identify_propagation_hubs(self, infected_agents: list[ComputerAgent], num_to_patch: int) -> list[ComputerAgent]:
+        """
+        Identify high-impact infected nodes for targeted remediation.
+
+        Identifies structural chokepoints in the network by ranking infected
+        nodes by their degree in the Barabasi-Albert topology. High-degree
+        nodes act as super-spreaders; prioritizing their remediation disrupts
+        the largest number of transmission paths.
+
+        Parameters
+        ----------
+        infected_agents : list[ComputerAgent]
+            Infected agents currently eligible for patching.
+        num_to_patch : int
+            Number of infected agents to select for patching.
+
+        Returns
+        -------
+        list[ComputerAgent]
+            Top `num_to_patch` infected agents sorted by descending degree.
+        """
+        ordered = sorted(infected_agents, key=lambda agent: self.graph.degree[agent.unique_id], reverse=True)
+        return ordered[:num_to_patch]
 
     def _assign_agent_types(self) -> Dict[int, str]:
         """Label nodes as Server, Lab PC, or Student Laptop based on degree ranking."""
