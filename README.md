@@ -57,3 +57,23 @@ PY
 - The network uses preferential attachment to model hubs typical of real systems.
 - Targeted patching is expected to outperform random patching in hub-dominated networks.
 
+## Mathematical Architecture & Generalizability
+The engine is substrate-agnostic: it computes stochastic SEIR-style compartment transitions over a Barabasi-Albert scale-free topology, then applies intervention as a controllable process (random or degree-targeted patching). Because spread is simulated on an explicit graph with heterogeneous node security, the same framework can be retuned to other host/pathogen-like contagion domains where network structure and intervention policy jointly determine cascade behavior.
+
+## Key Results
+The notebook `run_analysis.ipynb` now reports reproducible Monte Carlo metrics using fixed seeds (`seed=trial_index`) with `N=200` and initial outbreak size `5`.
+
+1. **Percolation sweep (transmission space, no intervention):**
+   - Across `virus_spread_chance in [0.02, 1.00]`, outbreak probability (`CumulativeExposed > 100`) is saturated at `1.0`.
+   - This implies the critical transmission threshold is below the tested range: **critical < 0.020** for BA(200, m=3) under zero patching.
+
+2. **Patching-rate sensitivity (Random strategy, spread=0.4):**
+   - Mean peak infected at `patching_rate=0.05`: **126.94**
+   - Mean peak infected at `patching_rate=0.10`: **85.18**
+   - Doubling patching rate reduces mean peak infection by **32.90%**
+
+3. **Strategy comparison (spread=0.4, patching_rate=0.10):**
+   - Mean peak infected with `Random`: **85.18**
+   - Mean peak infected with `Targeted`: **40.68**
+   - Targeted hub patching reduces mean peak infection by **52.24%** versus random at the same rate.
+
