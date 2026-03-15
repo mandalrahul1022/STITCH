@@ -136,7 +136,26 @@ Practical implication: given a network snapshot right now, STITCH can flag which
 
 ---
 
-## Quick Start
+## Interactive Browser Dashboard
+
+```bash
+pip install -r requirements.txt
+streamlit run app.py          # opens http://localhost:8501
+```
+
+The Streamlit dashboard provides a single-page research interface with:
+
+| Panel | What it shows |
+|---|---|
+| **Sidebar** | Sliders for β, patching rate, patch completion prob, rewire rate, strategy toggle (Random / Targeted), tick count, seed, and a "Run Simulation" button |
+| **Tab 1 — Epidemic Simulation** | Runs the full 10,000-node tensor engine live. Displays spectral metrics (ρ, λc, β/λc), peak infected stats, interactive Plotly SEIR compartment curves, stacked node-fate chart, and patching queue depth |
+| **Tab 2 — Spectral Calibration** | Explains the spectral graph theory pre-flight check with the `epidemic_dashboard.png` 4-panel visualization |
+| **Tab 3 — Sobol Sensitivity** | Displays pre-generated `sobol_indices.png` and `interaction_heatmap.png` with narrative interpretation |
+| **Tab 4 — GNN Prediction** | Shows accuracy / AUC metrics and `gnn_performance.png` with ROC analysis |
+
+---
+
+## Quick Start (CLI)
 
 ```bash
 pip install -r requirements.txt
@@ -149,6 +168,9 @@ python3 sensitivity_analysis.py
 
 # Step 3 — train GNN (generates gnn_performance.png)
 python3 predictive_model.py
+
+# Step 4 — launch interactive browser dashboard
+streamlit run app.py
 ```
 
 ---
@@ -211,6 +233,7 @@ P(exposure)        = 1 − (1 − β)^k       (per-node, vectorized, zero loops)
 
 | File | Role | Status |
 |---|---|---|
+| `app.py` | Streamlit browser dashboard — interactive simulation + research visualizations | Active |
 | `tensor_engine.py` | Vectorized SEIR core, spectral calibration, Phase III | Active |
 | `run_pipeline.py` | Simulation → Parquet → PyG orchestrator | Active |
 | `sensitivity_analysis.py` | Sobol global sensitivity, 640 runs | Active |
