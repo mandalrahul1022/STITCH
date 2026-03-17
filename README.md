@@ -358,20 +358,12 @@ The T-GCN architecture trained on cyber-contagion learns the **physics of diffus
 
 ---
 
-## ⚠️ Honest Limitations & Future Work
+## ⚠️ Limitations & Future Work
 
-**Current limitations:**
-- **Single test-seed evaluation.** Results are from test seeds 52-53. A robust publication requires 3-5 test seed combinations with reported mean ± std to confirm stability.
-- **Training convergence.** AUC oscillates during training (84.6% → 92.0% → 82.9% → 87.3% across epochs 20-60). A learning rate scheduler (`ReduceLROnPlateau`) or early stopping with best-checkpoint selection would likely push full-visibility AUC above 0.90.
-- **Synthetic topology.** BA graphs approximate real-world power-law networks but do not capture community structure, geographic clustering, or heterogeneous edge weights present in empirical network data.
-- **Class imbalance.** 89.2% of test nodes are infected, making raw accuracy a near-useless metric. AUC-ROC is the definitive evaluation metric throughout.
-
-**Planned extensions:**
-- **Progressive masking sweep.** Evaluate at 50%, 70%, 85%, 95% masking and plot the full AUC degradation curve.
-- **Degree-biased masking.** Preferentially mask hub nodes to stress-test the model under worst-case telemetry loss.
-- **Spatial cluster masking.** Mask entire subnets to simulate realistic switch/segment failures.
-- **Multi-seed stability harness.** Automate 5+ seed combinations and report mean ± std for all metrics.
-- **Empirical topology.** Replace BA graphs with real network telemetry or CDC host-contact datasets.
+- Single test-seed pair (52, 53); multi-seed stability harness with mean ± std is planned.
+- AUC oscillates during training (84.6% → 92.0% → 82.9% → 87.3% across epochs 20-60). A learning rate scheduler or early stopping with best-checkpoint selection would likely push full-visibility AUC above 0.90.
+- BA graphs approximate but do not fully capture edge heterogeneity.
+- Planned: progressive masking sweep (50-95%), degree-biased/spatial cluster masking, empirical topology replacement with real network or CDC host-contact data.
 
 ---
 
