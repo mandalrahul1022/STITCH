@@ -352,9 +352,8 @@ The T-GCN architecture trained on cyber-contagion learns the **physics of diffus
 | `sobol_indices.png` | Sobol S1/ST bar chart | Artifact |
 | `interaction_heatmap.png` | Pairwise S2 interaction heatmap | Artifact |
 | `gnn_performance.png` | T-GCN training curves + dual ROC (full vs masked) | Artifact |
-| `models/university_network.py` | Mesa ABM (N=200, interactive) | Legacy |
-| `server.py` | Mesa browser dashboard | Legacy |
-| `run_analysis.ipynb` | Mesa proof-of-concept experiments | Legacy |
+| `models/university_network.py` | Legacy Mesa ABM model (N=200) | Legacy |
+| `run_analysis.ipynb` | Legacy proof-of-concept notebook | Legacy |
 
 ---
 
@@ -374,17 +373,12 @@ The T-GCN architecture trained on cyber-contagion learns the **physics of diffus
 
 ---
 
-## Appendix: Legacy Interactive Dashboard (Mesa)
+## Appendix: Legacy Mesa Prototype (No Dashboard)
 
-The original Mesa agent-based model (N=200) provides a live browser UI for interactive exploration. It is self-contained and independent of the tensor engine.
-
-```bash
-python3 server.py     # open http://127.0.0.1:8521
-```
-
-The dashboard provides real-time sliders for virus spread, patching rate, and outbreak size, with four live charts: SEIR time series, daily events, device-type infection curves, and the live network graph with colour-coded nodes. The Mesa model validated the core mathematical framework before scaling to N=10,000.
+The original Mesa agent-based model (N=200) remains in `models/university_network.py` as a legacy prototype used early in development. The interactive Mesa dashboard (`server.py`) has been removed to keep the repository focused on the 10,000-node tensor + T-GCN pipeline.
 
 ---
+
 
 ## License
 
