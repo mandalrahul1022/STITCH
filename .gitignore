@@ -22,6 +22,10 @@ stitch_env/
 
 # Model / intermediate artifacts
 *.pt
+*.ckpt
+
+# Research pilot run outputs (write-once result directories; hashes go in commits)
+research_pilot/results/
 
 # Assistant scratch files
 claude.md
