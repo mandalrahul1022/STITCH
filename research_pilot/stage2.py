@@ -12,7 +12,7 @@ from sklearn.metrics import average_precision_score
 from threadpoolctl import threadpool_limits
 
 from classical import METHODS, Dynamics, adjacency, classifier, columns, design, predict
-from metrics import csv_write, evaluate, finite_mean, summaries, tie_keys, PRIMARY
+from metrics import csv_write, evaluate, finite_mean, reliability, summaries, tie_keys, PRIMARY
 from pilot import EVENT_ORIGINS, PRIMARY_ORIGINS, labels
 from stage1 import FAMILIAR, HELD_OUT, write_json
 
@@ -89,12 +89,14 @@ def fit(data, manifest, out):
 
 def evaluate_test(data, manifest, out, models):
     rows, diagnostic = [], []
+    pooled = {}  # (population, condition, model) -> primary-origin targets and scores
     pred_dir = out / "predictions"
     pred_dir.mkdir()
     for view in views(data, manifest, "test", EVENT_ORIGINS):
         x, e = view.x, view.ep
         known = x[list(EVENT_ORIGINS), :, 6].astype(bool)
         keys = tie_keys(e["seed"], len(view.first))
+        y_all = np.array([labels(view.first, t) for t in EVENT_ORIGINS])
         scores = {}
         for name in METHODS:
             scores[name] = predict(name, models[name], x, EVENT_ORIGINS, view.adj, view.matrix)
@@ -104,6 +106,10 @@ def evaluate_test(data, manifest, out, models):
                 row = dict(graph=e["graph"], episode=e["id"], beta=e["beta"], condition=view.condition,
                            model=name, population=pop)
                 rows.append({**row, **evaluate(scores[name], view.first, allowed, keys)})
+                keep = allowed & PRIMARY[:, None]
+                bucket = pooled.setdefault((pop, view.condition, name), ([], []))
+                bucket[0].append(y_all[keep])
+                bucket[1].append(scores[name][keep])
         np.savez_compressed(pred_dir / f"{e['id']}_{view.condition}.npz", **scores)
         if view.condition == "bridge_persistent":
             target = np.array([labels(view.first, t) for t in PRIMARY_ORIGINS])
@@ -116,6 +122,12 @@ def evaluate_test(data, manifest, out, models):
                                        positives=int(target[eligible].sum()),
                                        eligible=int(eligible.sum()), prevalence=float(target[eligible].mean())))
     summaries(rows, out, METHODS, FAMILIAR + HELD_OUT)
+    # Diagnostic reliability table: primary host-origins pooled over all test episodes
+    # (not graph-weighted). Per-episode ECE in the summaries uses the same binning.
+    csv_write(out / "reliability.csv", [
+        dict(population=pop, condition=cond, model=name, **r)
+        for (pop, cond, name), (ys, ps) in pooled.items()
+        for r in reliability(np.concatenate(ys), np.concatenate(ps))])
     csv_write(out / "bridge_prevalence_by_episode.csv", diagnostic)
     diag = {}
     for rule in ("E/I", "E/I/P"):

@@ -7,8 +7,29 @@ from sklearn.metrics import average_precision_score, roc_auc_score
 from pilot import EVENT_ORIGINS, PRIMARY_ORIGINS, labels
 
 METRICS = ("auc", "ap", "precision_at_budget", "recall_at_budget",
-           "late_detection_share", "unique_event_recall", "lead_time", "brier", "prevalence")
+           "late_detection_share", "unique_event_recall", "lead_time", "brier", "ece", "prevalence")
 PRIMARY = np.isin(EVENT_ORIGINS, PRIMARY_ORIGINS)
+RELIABILITY_BINS = 10
+BOOTSTRAP_RESAMPLES = 10_000
+BOOTSTRAP_SEED = 1702
+
+
+def reliability(target, prob, bins=RELIABILITY_BINS):
+    """Equal-mass bins over a stable sort of the scores: (count, mean score, event rate) per bin."""
+    order = np.argsort(prob, kind="stable")
+    rows = []
+    for k, idx in enumerate(np.array_split(order, bins)):
+        if idx.size:
+            rows.append(dict(bin=k, n=int(idx.size), mean_score=float(prob[idx].mean()),
+                             event_rate=float(target[idx].mean())))
+    return rows
+
+
+def ece(target, prob, bins=RELIABILITY_BINS):
+    """Expected calibration error over equal-mass bins, weighted by bin size."""
+    rows = reliability(target, prob, bins)
+    total = sum(r["n"] for r in rows)
+    return sum(r["n"] / total * abs(r["mean_score"] - r["event_rate"]) for r in rows) if total else np.nan
 
 
 def ranks(scores, candidates, key):
@@ -47,7 +68,7 @@ def evaluate(scores, first, allowed, keys):
                 late_detection_share=ratio((selected & prior).sum(), selected.sum()),
                 unique_event_recall=ratio(detected.sum(), eligible.sum()),
                 lead_time=float(lead.mean()) if lead.size else np.nan,
-                brier=np.mean((prob - target)**2), prevalence=target.mean(),
+                brier=np.mean((prob - target)**2), ece=ece(target, prob), prevalence=target.mean(),
                 positive_host_origins=int(target.sum()), eligible_host_origins=int(target.size),
                 eligible_unique_events=int(eligible.sum()), warned_unique_events=int(detected.sum()))
 
@@ -68,8 +89,8 @@ def finite_mean(a, axis=0):
 def summaries(rows, out, methods, conditions):
     """Same graph-index resamples for every method, condition and population."""
     graphs = sorted({r["graph"] for r in rows})
-    rng = np.random.default_rng(1702)
-    draw = rng.integers(len(graphs), size=(2000, len(graphs)))
+    rng = np.random.default_rng(BOOTSTRAP_SEED)
+    draw = rng.integers(len(graphs), size=(BOOTSTRAP_RESAMPLES, len(graphs)))
     graph_rows, point, intervals, differences = [], [], [], []
     for pop in ("all", "candidate"):
         for cond in conditions:
@@ -89,7 +110,8 @@ def summaries(rows, out, methods, conditions):
                 cells = np.asarray(cells)
                 estimates[model] = cells
                 means = finite_mean(cells)
-                point.append(dict(**info, **dict(zip(METRICS, means))))
+                counts = {f"n_{m}": int(c) for m, c in zip(METRICS, np.isfinite(cells).sum(axis=0))}
+                point.append(dict(**info, **dict(zip(METRICS, means)), **counts))
                 boot = finite_mean(cells[draw], axis=1)
                 for j, metric in enumerate(METRICS):
                     finite = boot[:, j][np.isfinite(boot[:, j])]
