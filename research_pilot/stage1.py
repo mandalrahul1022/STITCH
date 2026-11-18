@@ -73,6 +73,15 @@ def run(archive, out):
                                 seed=outbreak_seed, beta=beta, file=filename,
                                 truth_hash=truth_hash(episode),
                                 ever_compromised=int((first >= 0).sum()),
+                                # Fizzle counts (Rahul, C03): (a) beyond the 3 seeds, (b) positive
+                                # host-origins over the primary origins; evaluation fizzle iff (b) == 0.
+                                hosts_compromised_beyond_seeds=int((first > 0).sum()),
+                                primary_window_positives=int(sum(labels(first, t).sum()
+                                                                 for t in PRIMARY_ORIGINS)),
+                                primary_window_unique_events=int(np.logical_or.reduce(
+                                    [labels(first, t) for t in PRIMARY_ORIGINS]).sum()),
+                                evaluation_fizzle=bool(not any(labels(first, t).any()
+                                                               for t in PRIMARY_ORIGINS)),
                                 first_events_in_forecast_windows=int(np.logical_or.reduce(
                                     [labels(first, t) for t in EVENT_ORIGINS]).sum())))
             for k, condition in enumerate(conditions):

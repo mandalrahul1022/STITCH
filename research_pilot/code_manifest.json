@@ -1,6 +1,6 @@
 {
   "base_commit": "43ca102ee8de944acf2177cb915db945999d08f9",
-  "combined_sha256": "71a66ff98701d029bd5dc64924460e05d040710fe3e9c9eaa623f1560c8272f8",
+  "combined_sha256": "cf57887c03b6172eedbf051b5813a7d6cd49df7d579f1bbb3c97e683bfb454a4",
   "n_files": 16,
   "normalization": "CRLF->LF for text suffixes .cfg,.csv,.ini,.json,.jsonl,.log,.md,.py,.toml,.txt,.yaml,.yml",
   "excluded": [
@@ -20,7 +20,7 @@
     "pilot.py": "f4a05041afd7a168053c82f1e1bdcf5e618af886621dcd7206be8b5554049500",
     "README.md": "c4bd03987338e7cf671b37735afde0f0d4cf89110f89aa12f0aedb062e865a6b",
     "requirements-pilot.txt": "885a698afcaab70b8d3b65c3c4a01778d2c3996aeebfbd734ce0e0fa00983e48",
-    "stage1.py": "4a5927b98119cf760412ee283bf3862d44ec07c5385286a20c34065937ac7dde",
+    "stage1.py": "993681c3a4504a249f330ee6054a961f2ad3b91556f4139d6c1bdb5366f3a9ef",
     "stage2.py": "e622a86d23be7e643ddb4a7b7ddc86d90c44d85d7cf21ca8fa251d39f23228ec",
     "tests/conftest.py": "d3a693a885eee896551a0d376743c55586f94126f0ef0cbbeb4ab20799d1114e",
     "tests/test_stage1.py": "b1ff27adf170614db9299bd96ec802937d11e6db1142548a1e92b64e9903ef91",

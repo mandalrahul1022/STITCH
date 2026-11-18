@@ -24,6 +24,9 @@ stitch_env/
 *.pt
 *.ckpt
 
+# Output of the original 43ca102 pipeline; kept out of pilot-rebuild commits
+gnn_performance.png
+
 # Research pilot run outputs (write-once result directories; hashes go in commits)
 research_pilot/results/
 

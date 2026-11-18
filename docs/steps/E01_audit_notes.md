@@ -77,4 +77,47 @@ Statuses: MATCH (does what section 3 says), DEVIATION (differs from section 3 or
 | 22 | Keep the extended truth hash; document it (C15). | no code change |
 | 23, 24, 25 | Bootstrap 10,000 resamples; per-episode ECE and `reliability.csv` (10 equal-mass bins); `n_<metric>` counts in `summary.csv`. | commit 11a959a |
 | 26, 27 | Handled in C03. | C03 |
-| 28 | `requirements-pilot.txt` repinned to the `.venv` versions, plus pytest 9.2.0 (installed for the C03 test suite). | this commit |
+| 28 | `requirements-pilot.txt` repinned to the `.venv` versions, plus pytest 9.2.0 (installed for the C03 test suite). | commit 7008855 |
+
+## C03 notes
+
+### Fizzle definition (Rahul, November 18, 2026; carried into the Phase 2 preregistration)
+
+Each episode record in `manifest.json` carries two counts:
+
+- (a) `hosts_compromised_beyond_seeds`: hosts with `C(v) > 0`, so the 3 initial infected hosts are excluded.
+- (b) `primary_window_positives`: positive host-origins `y(v,t) = 1` summed over the primary origins `t = 13, 15, ..., 43`. The record also carries `primary_window_unique_events`, the number of distinct hosts behind those positives.
+
+An episode is an **evaluation fizzle** when (b) = 0 (`evaluation_fizzle` in the manifest). Every episode is kept regardless.
+
+Results on the C03 data (`research_pilot/results/stage1/run_a`, identical in `run_b`):
+
+| Count | Min (episode) | Median | Max |
+|-------|---------------|--------|-----|
+| (a) hosts compromised beyond the seeds | 24 (1003_0) | 126.5 | 230 |
+| (b) primary-window positive host-origins | 29 (1003_0) | 192.5 | 429 |
+| distinct hosts behind (b) | 12 (1003_0) | 87 | 180 |
+
+Evaluation fizzles: 0 of 48.
+
+Hosts ever compromised per episode, including the 3 seeds (`ever_compromised`), by transmission setting:
+
+| beta | Episodes | Min | Median | Max |
+|------|----------|-----|--------|-----|
+| 0.04 | 24 | 27 | 58.5 | 130 |
+| 0.09 | 24 | 129 | 199 | 233 |
+
+### T10b replaces "truth hash identical across masks"
+
+Section 4.1 defines T10b as "truth hash identical across all six mask conditions for every episode". In this pipeline an episode is simulated once and stored once (`stage1.py:60`). The mask conditions are observation views computed from that one stored file, so there is no per-condition truth to hash. Comparing the hash per condition would compare a file with itself and could not fail.
+
+The implemented T10b tests the property the spec check protects, that every condition observes the same outbreak, more directly:
+
+1. It recomputes each stored episode's truth hash and requires it to equal the manifest.
+2. For each of the 192 views, it regenerates the mask from the view's recorded `mask_seed` (and the graph's stored bridge, matched or region set).
+3. It rebuilds the eight feature channels from the episode's stored truth under that mask and requires bit equality with the stored view.
+4. It requires each test episode to have exactly its six conditions, and each train and validation episode exactly the three training conditions.
+
+This is stronger in two ways. A view built from any other trajectory differs in at least one visible cell, so the check fails. It also pins each mask to its recorded seed, which a hash comparison does not.
+
+The one difference it cannot detect is a trajectory that differs only in cells hidden in that view. Those cells cannot reach the inputs (T03). Labels and the reference defender's queue history are read only from the single stored episode file, which every condition shares by episode ID (`stage2.py`, `views`). A negative control (one flipped availability cell in a copy of the data) made T06, T10 and T10b fail.
