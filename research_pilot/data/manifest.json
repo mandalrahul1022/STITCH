@@ -1,0 +1,3074 @@
+{
+  "graph_source": "September archived edge-list replay, freshly simulated episodes",
+  "config": {
+    "nodes": 256,
+    "ticks": 56,
+    "history": 8,
+    "horizon": 5,
+    "initial_infected": 3,
+    "betas": [
+      0.04,
+      0.09
+    ],
+    "volatility": 0.2,
+    "progression": 0.5,
+    "queue_weight": 0.5,
+    "reference_coverage": 0.8,
+    "patch_rate": 0.1,
+    "completion": 0.33,
+    "rewiring": 0,
+    "hidden_nodes": 102,
+    "outage": [
+      12,
+      44
+    ],
+    "primary_origins": [
+      13,
+      15,
+      17,
+      19,
+      21,
+      23,
+      25,
+      27,
+      29,
+      31,
+      33,
+      35,
+      37,
+      39,
+      41,
+      43
+    ],
+    "event_origins": [
+      7,
+      9,
+      11,
+      13,
+      15,
+      17,
+      19,
+      21,
+      23,
+      25,
+      27,
+      29,
+      31,
+      33,
+      35,
+      37,
+      39,
+      41,
+      43,
+      45,
+      47,
+      49,
+      51
+    ],
+    "training_masks": [
+      "full",
+      "scattered",
+      "random_persistent"
+    ],
+    "test_only_masks": [
+      "bridge_persistent",
+      "degree_matched",
+      "region_persistent"
+    ],
+    "confirmation": "E-I-P",
+    "rng": "NumPy Generator PCG64",
+    "outbreak_seed_source": "results/manifest.json inside September ZIP",
+    "log_degree": "log1p(degree)/log1p(max degree)",
+    "count_window": "distinct first events in the union of extended windows"
+  },
+  "graphs": [
+    {
+      "seed": 1000,
+      "family": "BA",
+      "hash": "f62bb83f368a3382e30bc005f3fd0f9b0c0fef22efd9676379447cadc2740e6c",
+      "split": "train"
+    },
+    {
+      "seed": 1001,
+      "family": "SBM",
+      "hash": "ef05b96efa156200a313daf209714265222ffa582e022a4524129b6b221d9812",
+      "split": "train"
+    },
+    {
+      "seed": 1002,
+      "family": "BA",
+      "hash": "70bdb0385cda5001ddface3cc24dd5b9be32f12f911c89a9a6fe007520c213b2",
+      "split": "train"
+    },
+    {
+      "seed": 1003,
+      "family": "SBM",
+      "hash": "cd62821e59ad29e4939be042cde89fa7471843309db4d1859f50624b16e781ca",
+      "split": "train"
+    },
+    {
+      "seed": 1004,
+      "family": "BA",
+      "hash": "79b187fed6928c56a518d0a74a6b2d93de908e7ddc4e687d905d703fd849a628",
+      "split": "train"
+    },
+    {
+      "seed": 1005,
+      "family": "SBM",
+      "hash": "eef80371375257540b63cd5de01e0438a715bcdbdc1c499e4a7c4a8108a8cce6",
+      "split": "train"
+    },
+    {
+      "seed": 1006,
+      "family": "BA",
+      "hash": "1e2aba417df017c0b11e65f6b98ba80727abcd77379e3cd20ce514f4385d0da4",
+      "split": "train"
+    },
+    {
+      "seed": 1007,
+      "family": "SBM",
+      "hash": "e0c460f1001855ccfbde00eea5fc682d60c54452a4863fab2cb4953c1e25af6c",
+      "split": "train"
+    },
+    {
+      "seed": 1008,
+      "family": "BA",
+      "hash": "2635a8e3bc9af76f7c6148abb6aeff7935377eeb336eb45d2fc8007b25922e8c",
+      "split": "train"
+    },
+    {
+      "seed": 1009,
+      "family": "SBM",
+      "hash": "671030f75754dce595857c8bcee469ece127608d14a177dc39968be7b0fa455c",
+      "split": "train"
+    },
+    {
+      "seed": 1010,
+      "family": "BA",
+      "hash": "868d35db96339fce1cf64a65c9df4d5b5c32410d69e0d1435ab44fd97dae8700",
+      "split": "train"
+    },
+    {
+      "seed": 1011,
+      "family": "SBM",
+      "hash": "2c86cbee5d83b795c2232003877430737a212a34b3c2527fb1fa1bc423361dea",
+      "split": "train"
+    },
+    {
+      "seed": 2000,
+      "family": "BA",
+      "hash": "b5a6146b8d05003fd18c7c5996c94929156b229b9e94999cfc687000d9a98b3e",
+      "split": "val"
+    },
+    {
+      "seed": 2001,
+      "family": "SBM",
+      "hash": "9b106ec068363f5b71ad539fde33ce342b3240d796a99a7db1d300f183224448",
+      "split": "val"
+    },
+    {
+      "seed": 2002,
+      "family": "BA",
+      "hash": "33c0f058844cb8a9a69a01065b80ba0ff90da874f130700690106e7a943cd4ec",
+      "split": "val"
+    },
+    {
+      "seed": 2003,
+      "family": "SBM",
+      "hash": "447f58551c3b0e05d34d19567e3b4e4874c9aee7c28c7f1ab62e1d85cd6da867",
+      "split": "val"
+    },
+    {
+      "seed": 3000,
+      "family": "BA",
+      "hash": "82a86052a96ce367a46d5ac1cc79e902fb98bc974fd8f35c77188f81e93205c4",
+      "split": "test",
+      "matched_bridge_overlap": 85
+    },
+    {
+      "seed": 3001,
+      "family": "SBM",
+      "hash": "58106b8602cf3d1f0d59b1f9b6be14522bce82dfbdd2143102b33702148d0293",
+      "split": "test",
+      "matched_bridge_overlap": 62
+    },
+    {
+      "seed": 3002,
+      "family": "BA",
+      "hash": "fd2d176403f70d7743a074a59dec46cf5797a230c0368c4c859542931101cd50",
+      "split": "test",
+      "matched_bridge_overlap": 82
+    },
+    {
+      "seed": 3003,
+      "family": "SBM",
+      "hash": "3696a31a8fb509030e55785f9a4a739450ec563224156ee32e62753a23c24889",
+      "split": "test",
+      "matched_bridge_overlap": 75
+    },
+    {
+      "seed": 3004,
+      "family": "BA",
+      "hash": "272f25d32c7da31aabcfeab809b84ce6fdbc4a013885d5b8b4f59e6e384d61a4",
+      "split": "test",
+      "matched_bridge_overlap": 87
+    },
+    {
+      "seed": 3005,
+      "family": "SBM",
+      "hash": "ef01a4cdf3a8c5c5d2b1bd3e86e16bd94c9602cf58f57da56f996de9ae16ae79",
+      "split": "test",
+      "matched_bridge_overlap": 77
+    },
+    {
+      "seed": 3006,
+      "family": "BA",
+      "hash": "25dd59eb864691e65cb75f80f9e28114274984d02a13020296b506c2184e06b2",
+      "split": "test",
+      "matched_bridge_overlap": 79
+    },
+    {
+      "seed": 3007,
+      "family": "SBM",
+      "hash": "ef9a495e2887bded784b0a6f08f3ff45a1d7ca3cb6ac37cdea0316673529794e",
+      "split": "test",
+      "matched_bridge_overlap": 66
+    }
+  ],
+  "episodes": [
+    {
+      "graph": 1000,
+      "id": "1000_0",
+      "split": "train",
+      "seed": 101777,
+      "beta": 0.04,
+      "file": "episode_1000_0.npz",
+      "truth_hash": "8aa8fe9f9676f7aa7a670732ee18283ea1526c3089b90976ef62c5983636888b",
+      "ever_compromised": 100,
+      "first_events_in_forecast_windows": 95
+    },
+    {
+      "graph": 1000,
+      "id": "1000_1",
+      "split": "train",
+      "seed": 101794,
+      "beta": 0.09,
+      "file": "episode_1000_1.npz",
+      "truth_hash": "8e78397f78b377346c2394bf3e3ef25f739eb9a9782428bd6b5844119f7433be",
+      "ever_compromised": 189,
+      "first_events_in_forecast_windows": 177
+    },
+    {
+      "graph": 1001,
+      "id": "1001_0",
+      "split": "train",
+      "seed": 101878,
+      "beta": 0.04,
+      "file": "episode_1001_0.npz",
+      "truth_hash": "bc02983fe6f43a6ae4612fcda131848c1f2ec16edf9f432441426db26d752c26",
+      "ever_compromised": 63,
+      "first_events_in_forecast_windows": 56
+    },
+    {
+      "graph": 1001,
+      "id": "1001_1",
+      "split": "train",
+      "seed": 101895,
+      "beta": 0.09,
+      "file": "episode_1001_1.npz",
+      "truth_hash": "0385e9979085742a9e6d67a0af670a8754a5d31b09e5b80bfd39a11741f88c72",
+      "ever_compromised": 149,
+      "first_events_in_forecast_windows": 140
+    },
+    {
+      "graph": 1002,
+      "id": "1002_0",
+      "split": "train",
+      "seed": 101979,
+      "beta": 0.04,
+      "file": "episode_1002_0.npz",
+      "truth_hash": "b01a4e367408432f4a47b6b2848e58ecd348590cbe78ca1ced42354ca2336f05",
+      "ever_compromised": 75,
+      "first_events_in_forecast_windows": 70
+    },
+    {
+      "graph": 1002,
+      "id": "1002_1",
+      "split": "train",
+      "seed": 101996,
+      "beta": 0.09,
+      "file": "episode_1002_1.npz",
+      "truth_hash": "faefecf5e315a08f3b5e64594baa1f7094220d23c6a9e1bed3b18b2185b10a73",
+      "ever_compromised": 199,
+      "first_events_in_forecast_windows": 175
+    },
+    {
+      "graph": 1003,
+      "id": "1003_0",
+      "split": "train",
+      "seed": 102080,
+      "beta": 0.04,
+      "file": "episode_1003_0.npz",
+      "truth_hash": "56e5427d5821c1d7068ecb23a5fd1a479e4a7de68b316a24c4b997d01b3222b2",
+      "ever_compromised": 27,
+      "first_events_in_forecast_windows": 20
+    },
+    {
+      "graph": 1003,
+      "id": "1003_1",
+      "split": "train",
+      "seed": 102097,
+      "beta": 0.09,
+      "file": "episode_1003_1.npz",
+      "truth_hash": "ac02fa9d56c63d4099a7a7748225f2c7391d40dcd31c53293d04eeb0691b2211",
+      "ever_compromised": 178,
+      "first_events_in_forecast_windows": 160
+    },
+    {
+      "graph": 1004,
+      "id": "1004_0",
+      "split": "train",
+      "seed": 102181,
+      "beta": 0.04,
+      "file": "episode_1004_0.npz",
+      "truth_hash": "6aad618acce1785bfa0c117f40d35e724bf1049d9b3de784255e24fa50913503",
+      "ever_compromised": 48,
+      "first_events_in_forecast_windows": 44
+    },
+    {
+      "graph": 1004,
+      "id": "1004_1",
+      "split": "train",
+      "seed": 102198,
+      "beta": 0.09,
+      "file": "episode_1004_1.npz",
+      "truth_hash": "e30c9a7de8a0fc9c6e38b068ef4a69977975c9fb9e203ed70274f379638b6f26",
+      "ever_compromised": 197,
+      "first_events_in_forecast_windows": 189
+    },
+    {
+      "graph": 1005,
+      "id": "1005_0",
+      "split": "train",
+      "seed": 102282,
+      "beta": 0.04,
+      "file": "episode_1005_0.npz",
+      "truth_hash": "0e34ba165e40539a5c5acd04876e8567bda5663ddcb617f36f66fdd13f8c289b",
+      "ever_compromised": 88,
+      "first_events_in_forecast_windows": 82
+    },
+    {
+      "graph": 1005,
+      "id": "1005_1",
+      "split": "train",
+      "seed": 102299,
+      "beta": 0.09,
+      "file": "episode_1005_1.npz",
+      "truth_hash": "c08bee6239e357863abb0620943a642d67a14fe1e3051a90727534151318aa2e",
+      "ever_compromised": 200,
+      "first_events_in_forecast_windows": 188
+    },
+    {
+      "graph": 1006,
+      "id": "1006_0",
+      "split": "train",
+      "seed": 102383,
+      "beta": 0.04,
+      "file": "episode_1006_0.npz",
+      "truth_hash": "f5abc1f70738877b7426767a4e7522f1e361db4c2dec7fce4e4e9b44c3efee63",
+      "ever_compromised": 48,
+      "first_events_in_forecast_windows": 45
+    },
+    {
+      "graph": 1006,
+      "id": "1006_1",
+      "split": "train",
+      "seed": 102400,
+      "beta": 0.09,
+      "file": "episode_1006_1.npz",
+      "truth_hash": "f134ebd71b8b0130dc7fa2e19b4ecd2627ab1343e8cb59b6a54d72b2f61e6f9a",
+      "ever_compromised": 215,
+      "first_events_in_forecast_windows": 192
+    },
+    {
+      "graph": 1007,
+      "id": "1007_0",
+      "split": "train",
+      "seed": 102484,
+      "beta": 0.04,
+      "file": "episode_1007_0.npz",
+      "truth_hash": "8848f462796438b7d4d5ebb7ec56e276c2e1631ab6312aeb5a1ca85729f4a9c9",
+      "ever_compromised": 53,
+      "first_events_in_forecast_windows": 49
+    },
+    {
+      "graph": 1007,
+      "id": "1007_1",
+      "split": "train",
+      "seed": 102501,
+      "beta": 0.09,
+      "file": "episode_1007_1.npz",
+      "truth_hash": "61eeb47acf42644af1b6fa786f3a68fd47e9546ee452e1d2dd4acb1462d688a9",
+      "ever_compromised": 153,
+      "first_events_in_forecast_windows": 147
+    },
+    {
+      "graph": 1008,
+      "id": "1008_0",
+      "split": "train",
+      "seed": 102585,
+      "beta": 0.04,
+      "file": "episode_1008_0.npz",
+      "truth_hash": "f4a7d37eb146cb6bb2b2dbcd688bf53b6ba39ae4eef327d9f93de7c85bed6129",
+      "ever_compromised": 100,
+      "first_events_in_forecast_windows": 91
+    },
+    {
+      "graph": 1008,
+      "id": "1008_1",
+      "split": "train",
+      "seed": 102602,
+      "beta": 0.09,
+      "file": "episode_1008_1.npz",
+      "truth_hash": "d638e343b68f5637c6fe7eaec7b2a736067ed36d6f15c4ddbc9fb94101ed0982",
+      "ever_compromised": 214,
+      "first_events_in_forecast_windows": 194
+    },
+    {
+      "graph": 1009,
+      "id": "1009_0",
+      "split": "train",
+      "seed": 102686,
+      "beta": 0.04,
+      "file": "episode_1009_0.npz",
+      "truth_hash": "74a1977cc8fda5038f77ca26ee1da61f3f7323d67752a3ec25eaaf27a05fdb61",
+      "ever_compromised": 41,
+      "first_events_in_forecast_windows": 32
+    },
+    {
+      "graph": 1009,
+      "id": "1009_1",
+      "split": "train",
+      "seed": 102703,
+      "beta": 0.09,
+      "file": "episode_1009_1.npz",
+      "truth_hash": "5b4946d57898e7b2c008ebb01e25c873c3e7df19798dc585c6576d186f3c0db4",
+      "ever_compromised": 214,
+      "first_events_in_forecast_windows": 205
+    },
+    {
+      "graph": 1010,
+      "id": "1010_0",
+      "split": "train",
+      "seed": 102787,
+      "beta": 0.04,
+      "file": "episode_1010_0.npz",
+      "truth_hash": "6f162ff5f1adc296d17d7a997687eda191ff6d4a84daaff1abc32d27e10f9d50",
+      "ever_compromised": 54,
+      "first_events_in_forecast_windows": 51
+    },
+    {
+      "graph": 1010,
+      "id": "1010_1",
+      "split": "train",
+      "seed": 102804,
+      "beta": 0.09,
+      "file": "episode_1010_1.npz",
+      "truth_hash": "8fd1c4b8b8aac7f971094076df91c0f0e1e523d68761ed7d22f3825d6a142b13",
+      "ever_compromised": 184,
+      "first_events_in_forecast_windows": 179
+    },
+    {
+      "graph": 1011,
+      "id": "1011_0",
+      "split": "train",
+      "seed": 102888,
+      "beta": 0.04,
+      "file": "episode_1011_0.npz",
+      "truth_hash": "9624b506dd15c1c0278c1164071ee90c8a1ce79436cf13382f806fd8f13ec5d1",
+      "ever_compromised": 70,
+      "first_events_in_forecast_windows": 63
+    },
+    {
+      "graph": 1011,
+      "id": "1011_1",
+      "split": "train",
+      "seed": 102905,
+      "beta": 0.09,
+      "file": "episode_1011_1.npz",
+      "truth_hash": "e284a01ffbe68781183fe1126b437e2b2351cbc6a8ee55fcd5fd045c315deacf",
+      "ever_compromised": 185,
+      "first_events_in_forecast_windows": 180
+    },
+    {
+      "graph": 2000,
+      "id": "2000_0",
+      "split": "val",
+      "seed": 202777,
+      "beta": 0.04,
+      "file": "episode_2000_0.npz",
+      "truth_hash": "a2ca672d274b395a56012e9013e510592de0cc56249f4c6c4630a15d61422f19",
+      "ever_compromised": 27,
+      "first_events_in_forecast_windows": 20
+    },
+    {
+      "graph": 2000,
+      "id": "2000_1",
+      "split": "val",
+      "seed": 202794,
+      "beta": 0.09,
+      "file": "episode_2000_1.npz",
+      "truth_hash": "2df2a93af3871f5eca8ad3fd65667686ee4b53de0a2b38c1f576370b97b0f7ab",
+      "ever_compromised": 206,
+      "first_events_in_forecast_windows": 193
+    },
+    {
+      "graph": 2001,
+      "id": "2001_0",
+      "split": "val",
+      "seed": 202878,
+      "beta": 0.04,
+      "file": "episode_2001_0.npz",
+      "truth_hash": "4d858699cfc062810a6dbd24c2191801ba4ffeff2382b20c7b3d630e724fcad2",
+      "ever_compromised": 34,
+      "first_events_in_forecast_windows": 29
+    },
+    {
+      "graph": 2001,
+      "id": "2001_1",
+      "split": "val",
+      "seed": 202895,
+      "beta": 0.09,
+      "file": "episode_2001_1.npz",
+      "truth_hash": "1d8ade60fd72b212bf9adfeea07107d1095029b9b2b85e55e8de3cb4714e0cbb",
+      "ever_compromised": 129,
+      "first_events_in_forecast_windows": 122
+    },
+    {
+      "graph": 2002,
+      "id": "2002_0",
+      "split": "val",
+      "seed": 202979,
+      "beta": 0.04,
+      "file": "episode_2002_0.npz",
+      "truth_hash": "e29db72f41b56b957b6b6abd4aed1569059212d9c9c5779b3e4fa7b92f1c1571",
+      "ever_compromised": 85,
+      "first_events_in_forecast_windows": 66
+    },
+    {
+      "graph": 2002,
+      "id": "2002_1",
+      "split": "val",
+      "seed": 202996,
+      "beta": 0.09,
+      "file": "episode_2002_1.npz",
+      "truth_hash": "6ee1eefd18c6b1357848945268f8fce26bc486f58bdc1c8a150fca0b5f9c34fc",
+      "ever_compromised": 196,
+      "first_events_in_forecast_windows": 179
+    },
+    {
+      "graph": 2003,
+      "id": "2003_0",
+      "split": "val",
+      "seed": 203080,
+      "beta": 0.04,
+      "file": "episode_2003_0.npz",
+      "truth_hash": "577aa61efeb3e797d52265500f5e3a505a85b80aac437982b59cad3c8e0849c4",
+      "ever_compromised": 47,
+      "first_events_in_forecast_windows": 42
+    },
+    {
+      "graph": 2003,
+      "id": "2003_1",
+      "split": "val",
+      "seed": 203097,
+      "beta": 0.09,
+      "file": "episode_2003_1.npz",
+      "truth_hash": "276b96a2a3a3eae62e86b31a6361f2c662d5422dbe4df67976118b662778ff36",
+      "ever_compromised": 199,
+      "first_events_in_forecast_windows": 190
+    },
+    {
+      "graph": 3000,
+      "id": "3000_0",
+      "split": "test",
+      "seed": 303777,
+      "beta": 0.04,
+      "file": "episode_3000_0.npz",
+      "truth_hash": "b17262d318c55f40d46e2e86092f8fe705a742c6162d0160ff266eb7bf874b23",
+      "ever_compromised": 81,
+      "first_events_in_forecast_windows": 73
+    },
+    {
+      "graph": 3000,
+      "id": "3000_1",
+      "split": "test",
+      "seed": 303794,
+      "beta": 0.09,
+      "file": "episode_3000_1.npz",
+      "truth_hash": "7b62cfac984c127b5812682a42189084c8d8ee93c520d9e7e4b29c1713a5424a",
+      "ever_compromised": 147,
+      "first_events_in_forecast_windows": 131
+    },
+    {
+      "graph": 3001,
+      "id": "3001_0",
+      "split": "test",
+      "seed": 303878,
+      "beta": 0.04,
+      "file": "episode_3001_0.npz",
+      "truth_hash": "2a910848d6d0c2fb1ab0dfb3cc313bdefce3f7de5bb6aff7e5485dffc64286c9",
+      "ever_compromised": 37,
+      "first_events_in_forecast_windows": 29
+    },
+    {
+      "graph": 3001,
+      "id": "3001_1",
+      "split": "test",
+      "seed": 303895,
+      "beta": 0.09,
+      "file": "episode_3001_1.npz",
+      "truth_hash": "d4861faaf42c701bad069f91ea5a974a5fdb95381f92c981870f49d994d9daef",
+      "ever_compromised": 215,
+      "first_events_in_forecast_windows": 204
+    },
+    {
+      "graph": 3002,
+      "id": "3002_0",
+      "split": "test",
+      "seed": 303979,
+      "beta": 0.04,
+      "file": "episode_3002_0.npz",
+      "truth_hash": "f8cb0f1dd942349e9eeb6d102f6f0ae408c3b2f5cf95072079d95fa8237869b9",
+      "ever_compromised": 87,
+      "first_events_in_forecast_windows": 70
+    },
+    {
+      "graph": 3002,
+      "id": "3002_1",
+      "split": "test",
+      "seed": 303996,
+      "beta": 0.09,
+      "file": "episode_3002_1.npz",
+      "truth_hash": "7832ab79c127beec409c09ac690d881d29340fc7a62235d4d37b32c5d0d7161d",
+      "ever_compromised": 233,
+      "first_events_in_forecast_windows": 211
+    },
+    {
+      "graph": 3003,
+      "id": "3003_0",
+      "split": "test",
+      "seed": 304080,
+      "beta": 0.04,
+      "file": "episode_3003_0.npz",
+      "truth_hash": "4dbaaf8233d4693d5f5b83e283ad072730e20e0c2ae20b02186876e15b68f4fe",
+      "ever_compromised": 52,
+      "first_events_in_forecast_windows": 40
+    },
+    {
+      "graph": 3003,
+      "id": "3003_1",
+      "split": "test",
+      "seed": 304097,
+      "beta": 0.09,
+      "file": "episode_3003_1.npz",
+      "truth_hash": "7150a2364bf883a52de088cbcdcd0fd8fd898fd1547b7cc190cd34745699a635",
+      "ever_compromised": 212,
+      "first_events_in_forecast_windows": 201
+    },
+    {
+      "graph": 3004,
+      "id": "3004_0",
+      "split": "test",
+      "seed": 304181,
+      "beta": 0.04,
+      "file": "episode_3004_0.npz",
+      "truth_hash": "5f267c2ec4b994fc4348e62798cc28b6c5d38e7d3173576c1c50f7f04decedd4",
+      "ever_compromised": 130,
+      "first_events_in_forecast_windows": 112
+    },
+    {
+      "graph": 3004,
+      "id": "3004_1",
+      "split": "test",
+      "seed": 304198,
+      "beta": 0.09,
+      "file": "episode_3004_1.npz",
+      "truth_hash": "883493f9fc406ca7d9f490a0c60b9d0420d9c8f49f3afd36e2ed21d3176812c4",
+      "ever_compromised": 207,
+      "first_events_in_forecast_windows": 193
+    },
+    {
+      "graph": 3005,
+      "id": "3005_0",
+      "split": "test",
+      "seed": 304282,
+      "beta": 0.04,
+      "file": "episode_3005_0.npz",
+      "truth_hash": "e70614b1fa0b95def5a2bd84a2b788773236bd1b6f6439a6e3580724cd8be2e1",
+      "ever_compromised": 112,
+      "first_events_in_forecast_windows": 106
+    },
+    {
+      "graph": 3005,
+      "id": "3005_1",
+      "split": "test",
+      "seed": 304299,
+      "beta": 0.09,
+      "file": "episode_3005_1.npz",
+      "truth_hash": "bbb3fa77058ae52015e1abfeea8faf5e0094f0166b2180788abbb88c2d6687dc",
+      "ever_compromised": 211,
+      "first_events_in_forecast_windows": 189
+    },
+    {
+      "graph": 3006,
+      "id": "3006_0",
+      "split": "test",
+      "seed": 304383,
+      "beta": 0.04,
+      "file": "episode_3006_0.npz",
+      "truth_hash": "e06027acc34e3c04ae7f95a77b760a9abcf47522f6b490cb5f0060f5415734a4",
+      "ever_compromised": 82,
+      "first_events_in_forecast_windows": 79
+    },
+    {
+      "graph": 3006,
+      "id": "3006_1",
+      "split": "test",
+      "seed": 304400,
+      "beta": 0.09,
+      "file": "episode_3006_1.npz",
+      "truth_hash": "880d28d151e3c255e2a7bf6b4487daf7c035e8d51b34ea8f49c3039c9f657bbc",
+      "ever_compromised": 208,
+      "first_events_in_forecast_windows": 201
+    },
+    {
+      "graph": 3007,
+      "id": "3007_0",
+      "split": "test",
+      "seed": 304484,
+      "beta": 0.04,
+      "file": "episode_3007_0.npz",
+      "truth_hash": "30d32289e8542fd10c39750507fd7c3024855558020e3e1e80bdd69f7a2d43fd",
+      "ever_compromised": 36,
+      "first_events_in_forecast_windows": 32
+    },
+    {
+      "graph": 3007,
+      "id": "3007_1",
+      "split": "test",
+      "seed": 304501,
+      "beta": 0.09,
+      "file": "episode_3007_1.npz",
+      "truth_hash": "689e68a82451d5580511f27014ca10dc026cbfeb482b2bd7586e50c9a9ac77c6",
+      "ever_compromised": 165,
+      "first_events_in_forecast_windows": 158
+    }
+  ],
+  "views": [
+    {
+      "graph": 1000,
+      "episode": "1000_0",
+      "condition": "full",
+      "mask_seed": [
+        1000,
+        0,
+        0,
+        503
+      ],
+      "file": "view_1000_0_full.npz"
+    },
+    {
+      "graph": 1000,
+      "episode": "1000_0",
+      "condition": "scattered",
+      "mask_seed": [
+        1000,
+        0,
+        1,
+        503
+      ],
+      "file": "view_1000_0_scattered.npz"
+    },
+    {
+      "graph": 1000,
+      "episode": "1000_0",
+      "condition": "random_persistent",
+      "mask_seed": [
+        1000,
+        0,
+        2,
+        503
+      ],
+      "file": "view_1000_0_random_persistent.npz"
+    },
+    {
+      "graph": 1000,
+      "episode": "1000_1",
+      "condition": "full",
+      "mask_seed": [
+        1000,
+        1,
+        0,
+        503
+      ],
+      "file": "view_1000_1_full.npz"
+    },
+    {
+      "graph": 1000,
+      "episode": "1000_1",
+      "condition": "scattered",
+      "mask_seed": [
+        1000,
+        1,
+        1,
+        503
+      ],
+      "file": "view_1000_1_scattered.npz"
+    },
+    {
+      "graph": 1000,
+      "episode": "1000_1",
+      "condition": "random_persistent",
+      "mask_seed": [
+        1000,
+        1,
+        2,
+        503
+      ],
+      "file": "view_1000_1_random_persistent.npz"
+    },
+    {
+      "graph": 1001,
+      "episode": "1001_0",
+      "condition": "full",
+      "mask_seed": [
+        1001,
+        0,
+        0,
+        503
+      ],
+      "file": "view_1001_0_full.npz"
+    },
+    {
+      "graph": 1001,
+      "episode": "1001_0",
+      "condition": "scattered",
+      "mask_seed": [
+        1001,
+        0,
+        1,
+        503
+      ],
+      "file": "view_1001_0_scattered.npz"
+    },
+    {
+      "graph": 1001,
+      "episode": "1001_0",
+      "condition": "random_persistent",
+      "mask_seed": [
+        1001,
+        0,
+        2,
+        503
+      ],
+      "file": "view_1001_0_random_persistent.npz"
+    },
+    {
+      "graph": 1001,
+      "episode": "1001_1",
+      "condition": "full",
+      "mask_seed": [
+        1001,
+        1,
+        0,
+        503
+      ],
+      "file": "view_1001_1_full.npz"
+    },
+    {
+      "graph": 1001,
+      "episode": "1001_1",
+      "condition": "scattered",
+      "mask_seed": [
+        1001,
+        1,
+        1,
+        503
+      ],
+      "file": "view_1001_1_scattered.npz"
+    },
+    {
+      "graph": 1001,
+      "episode": "1001_1",
+      "condition": "random_persistent",
+      "mask_seed": [
+        1001,
+        1,
+        2,
+        503
+      ],
+      "file": "view_1001_1_random_persistent.npz"
+    },
+    {
+      "graph": 1002,
+      "episode": "1002_0",
+      "condition": "full",
+      "mask_seed": [
+        1002,
+        0,
+        0,
+        503
+      ],
+      "file": "view_1002_0_full.npz"
+    },
+    {
+      "graph": 1002,
+      "episode": "1002_0",
+      "condition": "scattered",
+      "mask_seed": [
+        1002,
+        0,
+        1,
+        503
+      ],
+      "file": "view_1002_0_scattered.npz"
+    },
+    {
+      "graph": 1002,
+      "episode": "1002_0",
+      "condition": "random_persistent",
+      "mask_seed": [
+        1002,
+        0,
+        2,
+        503
+      ],
+      "file": "view_1002_0_random_persistent.npz"
+    },
+    {
+      "graph": 1002,
+      "episode": "1002_1",
+      "condition": "full",
+      "mask_seed": [
+        1002,
+        1,
+        0,
+        503
+      ],
+      "file": "view_1002_1_full.npz"
+    },
+    {
+      "graph": 1002,
+      "episode": "1002_1",
+      "condition": "scattered",
+      "mask_seed": [
+        1002,
+        1,
+        1,
+        503
+      ],
+      "file": "view_1002_1_scattered.npz"
+    },
+    {
+      "graph": 1002,
+      "episode": "1002_1",
+      "condition": "random_persistent",
+      "mask_seed": [
+        1002,
+        1,
+        2,
+        503
+      ],
+      "file": "view_1002_1_random_persistent.npz"
+    },
+    {
+      "graph": 1003,
+      "episode": "1003_0",
+      "condition": "full",
+      "mask_seed": [
+        1003,
+        0,
+        0,
+        503
+      ],
+      "file": "view_1003_0_full.npz"
+    },
+    {
+      "graph": 1003,
+      "episode": "1003_0",
+      "condition": "scattered",
+      "mask_seed": [
+        1003,
+        0,
+        1,
+        503
+      ],
+      "file": "view_1003_0_scattered.npz"
+    },
+    {
+      "graph": 1003,
+      "episode": "1003_0",
+      "condition": "random_persistent",
+      "mask_seed": [
+        1003,
+        0,
+        2,
+        503
+      ],
+      "file": "view_1003_0_random_persistent.npz"
+    },
+    {
+      "graph": 1003,
+      "episode": "1003_1",
+      "condition": "full",
+      "mask_seed": [
+        1003,
+        1,
+        0,
+        503
+      ],
+      "file": "view_1003_1_full.npz"
+    },
+    {
+      "graph": 1003,
+      "episode": "1003_1",
+      "condition": "scattered",
+      "mask_seed": [
+        1003,
+        1,
+        1,
+        503
+      ],
+      "file": "view_1003_1_scattered.npz"
+    },
+    {
+      "graph": 1003,
+      "episode": "1003_1",
+      "condition": "random_persistent",
+      "mask_seed": [
+        1003,
+        1,
+        2,
+        503
+      ],
+      "file": "view_1003_1_random_persistent.npz"
+    },
+    {
+      "graph": 1004,
+      "episode": "1004_0",
+      "condition": "full",
+      "mask_seed": [
+        1004,
+        0,
+        0,
+        503
+      ],
+      "file": "view_1004_0_full.npz"
+    },
+    {
+      "graph": 1004,
+      "episode": "1004_0",
+      "condition": "scattered",
+      "mask_seed": [
+        1004,
+        0,
+        1,
+        503
+      ],
+      "file": "view_1004_0_scattered.npz"
+    },
+    {
+      "graph": 1004,
+      "episode": "1004_0",
+      "condition": "random_persistent",
+      "mask_seed": [
+        1004,
+        0,
+        2,
+        503
+      ],
+      "file": "view_1004_0_random_persistent.npz"
+    },
+    {
+      "graph": 1004,
+      "episode": "1004_1",
+      "condition": "full",
+      "mask_seed": [
+        1004,
+        1,
+        0,
+        503
+      ],
+      "file": "view_1004_1_full.npz"
+    },
+    {
+      "graph": 1004,
+      "episode": "1004_1",
+      "condition": "scattered",
+      "mask_seed": [
+        1004,
+        1,
+        1,
+        503
+      ],
+      "file": "view_1004_1_scattered.npz"
+    },
+    {
+      "graph": 1004,
+      "episode": "1004_1",
+      "condition": "random_persistent",
+      "mask_seed": [
+        1004,
+        1,
+        2,
+        503
+      ],
+      "file": "view_1004_1_random_persistent.npz"
+    },
+    {
+      "graph": 1005,
+      "episode": "1005_0",
+      "condition": "full",
+      "mask_seed": [
+        1005,
+        0,
+        0,
+        503
+      ],
+      "file": "view_1005_0_full.npz"
+    },
+    {
+      "graph": 1005,
+      "episode": "1005_0",
+      "condition": "scattered",
+      "mask_seed": [
+        1005,
+        0,
+        1,
+        503
+      ],
+      "file": "view_1005_0_scattered.npz"
+    },
+    {
+      "graph": 1005,
+      "episode": "1005_0",
+      "condition": "random_persistent",
+      "mask_seed": [
+        1005,
+        0,
+        2,
+        503
+      ],
+      "file": "view_1005_0_random_persistent.npz"
+    },
+    {
+      "graph": 1005,
+      "episode": "1005_1",
+      "condition": "full",
+      "mask_seed": [
+        1005,
+        1,
+        0,
+        503
+      ],
+      "file": "view_1005_1_full.npz"
+    },
+    {
+      "graph": 1005,
+      "episode": "1005_1",
+      "condition": "scattered",
+      "mask_seed": [
+        1005,
+        1,
+        1,
+        503
+      ],
+      "file": "view_1005_1_scattered.npz"
+    },
+    {
+      "graph": 1005,
+      "episode": "1005_1",
+      "condition": "random_persistent",
+      "mask_seed": [
+        1005,
+        1,
+        2,
+        503
+      ],
+      "file": "view_1005_1_random_persistent.npz"
+    },
+    {
+      "graph": 1006,
+      "episode": "1006_0",
+      "condition": "full",
+      "mask_seed": [
+        1006,
+        0,
+        0,
+        503
+      ],
+      "file": "view_1006_0_full.npz"
+    },
+    {
+      "graph": 1006,
+      "episode": "1006_0",
+      "condition": "scattered",
+      "mask_seed": [
+        1006,
+        0,
+        1,
+        503
+      ],
+      "file": "view_1006_0_scattered.npz"
+    },
+    {
+      "graph": 1006,
+      "episode": "1006_0",
+      "condition": "random_persistent",
+      "mask_seed": [
+        1006,
+        0,
+        2,
+        503
+      ],
+      "file": "view_1006_0_random_persistent.npz"
+    },
+    {
+      "graph": 1006,
+      "episode": "1006_1",
+      "condition": "full",
+      "mask_seed": [
+        1006,
+        1,
+        0,
+        503
+      ],
+      "file": "view_1006_1_full.npz"
+    },
+    {
+      "graph": 1006,
+      "episode": "1006_1",
+      "condition": "scattered",
+      "mask_seed": [
+        1006,
+        1,
+        1,
+        503
+      ],
+      "file": "view_1006_1_scattered.npz"
+    },
+    {
+      "graph": 1006,
+      "episode": "1006_1",
+      "condition": "random_persistent",
+      "mask_seed": [
+        1006,
+        1,
+        2,
+        503
+      ],
+      "file": "view_1006_1_random_persistent.npz"
+    },
+    {
+      "graph": 1007,
+      "episode": "1007_0",
+      "condition": "full",
+      "mask_seed": [
+        1007,
+        0,
+        0,
+        503
+      ],
+      "file": "view_1007_0_full.npz"
+    },
+    {
+      "graph": 1007,
+      "episode": "1007_0",
+      "condition": "scattered",
+      "mask_seed": [
+        1007,
+        0,
+        1,
+        503
+      ],
+      "file": "view_1007_0_scattered.npz"
+    },
+    {
+      "graph": 1007,
+      "episode": "1007_0",
+      "condition": "random_persistent",
+      "mask_seed": [
+        1007,
+        0,
+        2,
+        503
+      ],
+      "file": "view_1007_0_random_persistent.npz"
+    },
+    {
+      "graph": 1007,
+      "episode": "1007_1",
+      "condition": "full",
+      "mask_seed": [
+        1007,
+        1,
+        0,
+        503
+      ],
+      "file": "view_1007_1_full.npz"
+    },
+    {
+      "graph": 1007,
+      "episode": "1007_1",
+      "condition": "scattered",
+      "mask_seed": [
+        1007,
+        1,
+        1,
+        503
+      ],
+      "file": "view_1007_1_scattered.npz"
+    },
+    {
+      "graph": 1007,
+      "episode": "1007_1",
+      "condition": "random_persistent",
+      "mask_seed": [
+        1007,
+        1,
+        2,
+        503
+      ],
+      "file": "view_1007_1_random_persistent.npz"
+    },
+    {
+      "graph": 1008,
+      "episode": "1008_0",
+      "condition": "full",
+      "mask_seed": [
+        1008,
+        0,
+        0,
+        503
+      ],
+      "file": "view_1008_0_full.npz"
+    },
+    {
+      "graph": 1008,
+      "episode": "1008_0",
+      "condition": "scattered",
+      "mask_seed": [
+        1008,
+        0,
+        1,
+        503
+      ],
+      "file": "view_1008_0_scattered.npz"
+    },
+    {
+      "graph": 1008,
+      "episode": "1008_0",
+      "condition": "random_persistent",
+      "mask_seed": [
+        1008,
+        0,
+        2,
+        503
+      ],
+      "file": "view_1008_0_random_persistent.npz"
+    },
+    {
+      "graph": 1008,
+      "episode": "1008_1",
+      "condition": "full",
+      "mask_seed": [
+        1008,
+        1,
+        0,
+        503
+      ],
+      "file": "view_1008_1_full.npz"
+    },
+    {
+      "graph": 1008,
+      "episode": "1008_1",
+      "condition": "scattered",
+      "mask_seed": [
+        1008,
+        1,
+        1,
+        503
+      ],
+      "file": "view_1008_1_scattered.npz"
+    },
+    {
+      "graph": 1008,
+      "episode": "1008_1",
+      "condition": "random_persistent",
+      "mask_seed": [
+        1008,
+        1,
+        2,
+        503
+      ],
+      "file": "view_1008_1_random_persistent.npz"
+    },
+    {
+      "graph": 1009,
+      "episode": "1009_0",
+      "condition": "full",
+      "mask_seed": [
+        1009,
+        0,
+        0,
+        503
+      ],
+      "file": "view_1009_0_full.npz"
+    },
+    {
+      "graph": 1009,
+      "episode": "1009_0",
+      "condition": "scattered",
+      "mask_seed": [
+        1009,
+        0,
+        1,
+        503
+      ],
+      "file": "view_1009_0_scattered.npz"
+    },
+    {
+      "graph": 1009,
+      "episode": "1009_0",
+      "condition": "random_persistent",
+      "mask_seed": [
+        1009,
+        0,
+        2,
+        503
+      ],
+      "file": "view_1009_0_random_persistent.npz"
+    },
+    {
+      "graph": 1009,
+      "episode": "1009_1",
+      "condition": "full",
+      "mask_seed": [
+        1009,
+        1,
+        0,
+        503
+      ],
+      "file": "view_1009_1_full.npz"
+    },
+    {
+      "graph": 1009,
+      "episode": "1009_1",
+      "condition": "scattered",
+      "mask_seed": [
+        1009,
+        1,
+        1,
+        503
+      ],
+      "file": "view_1009_1_scattered.npz"
+    },
+    {
+      "graph": 1009,
+      "episode": "1009_1",
+      "condition": "random_persistent",
+      "mask_seed": [
+        1009,
+        1,
+        2,
+        503
+      ],
+      "file": "view_1009_1_random_persistent.npz"
+    },
+    {
+      "graph": 1010,
+      "episode": "1010_0",
+      "condition": "full",
+      "mask_seed": [
+        1010,
+        0,
+        0,
+        503
+      ],
+      "file": "view_1010_0_full.npz"
+    },
+    {
+      "graph": 1010,
+      "episode": "1010_0",
+      "condition": "scattered",
+      "mask_seed": [
+        1010,
+        0,
+        1,
+        503
+      ],
+      "file": "view_1010_0_scattered.npz"
+    },
+    {
+      "graph": 1010,
+      "episode": "1010_0",
+      "condition": "random_persistent",
+      "mask_seed": [
+        1010,
+        0,
+        2,
+        503
+      ],
+      "file": "view_1010_0_random_persistent.npz"
+    },
+    {
+      "graph": 1010,
+      "episode": "1010_1",
+      "condition": "full",
+      "mask_seed": [
+        1010,
+        1,
+        0,
+        503
+      ],
+      "file": "view_1010_1_full.npz"
+    },
+    {
+      "graph": 1010,
+      "episode": "1010_1",
+      "condition": "scattered",
+      "mask_seed": [
+        1010,
+        1,
+        1,
+        503
+      ],
+      "file": "view_1010_1_scattered.npz"
+    },
+    {
+      "graph": 1010,
+      "episode": "1010_1",
+      "condition": "random_persistent",
+      "mask_seed": [
+        1010,
+        1,
+        2,
+        503
+      ],
+      "file": "view_1010_1_random_persistent.npz"
+    },
+    {
+      "graph": 1011,
+      "episode": "1011_0",
+      "condition": "full",
+      "mask_seed": [
+        1011,
+        0,
+        0,
+        503
+      ],
+      "file": "view_1011_0_full.npz"
+    },
+    {
+      "graph": 1011,
+      "episode": "1011_0",
+      "condition": "scattered",
+      "mask_seed": [
+        1011,
+        0,
+        1,
+        503
+      ],
+      "file": "view_1011_0_scattered.npz"
+    },
+    {
+      "graph": 1011,
+      "episode": "1011_0",
+      "condition": "random_persistent",
+      "mask_seed": [
+        1011,
+        0,
+        2,
+        503
+      ],
+      "file": "view_1011_0_random_persistent.npz"
+    },
+    {
+      "graph": 1011,
+      "episode": "1011_1",
+      "condition": "full",
+      "mask_seed": [
+        1011,
+        1,
+        0,
+        503
+      ],
+      "file": "view_1011_1_full.npz"
+    },
+    {
+      "graph": 1011,
+      "episode": "1011_1",
+      "condition": "scattered",
+      "mask_seed": [
+        1011,
+        1,
+        1,
+        503
+      ],
+      "file": "view_1011_1_scattered.npz"
+    },
+    {
+      "graph": 1011,
+      "episode": "1011_1",
+      "condition": "random_persistent",
+      "mask_seed": [
+        1011,
+        1,
+        2,
+        503
+      ],
+      "file": "view_1011_1_random_persistent.npz"
+    },
+    {
+      "graph": 2000,
+      "episode": "2000_0",
+      "condition": "full",
+      "mask_seed": [
+        2000,
+        0,
+        0,
+        503
+      ],
+      "file": "view_2000_0_full.npz"
+    },
+    {
+      "graph": 2000,
+      "episode": "2000_0",
+      "condition": "scattered",
+      "mask_seed": [
+        2000,
+        0,
+        1,
+        503
+      ],
+      "file": "view_2000_0_scattered.npz"
+    },
+    {
+      "graph": 2000,
+      "episode": "2000_0",
+      "condition": "random_persistent",
+      "mask_seed": [
+        2000,
+        0,
+        2,
+        503
+      ],
+      "file": "view_2000_0_random_persistent.npz"
+    },
+    {
+      "graph": 2000,
+      "episode": "2000_1",
+      "condition": "full",
+      "mask_seed": [
+        2000,
+        1,
+        0,
+        503
+      ],
+      "file": "view_2000_1_full.npz"
+    },
+    {
+      "graph": 2000,
+      "episode": "2000_1",
+      "condition": "scattered",
+      "mask_seed": [
+        2000,
+        1,
+        1,
+        503
+      ],
+      "file": "view_2000_1_scattered.npz"
+    },
+    {
+      "graph": 2000,
+      "episode": "2000_1",
+      "condition": "random_persistent",
+      "mask_seed": [
+        2000,
+        1,
+        2,
+        503
+      ],
+      "file": "view_2000_1_random_persistent.npz"
+    },
+    {
+      "graph": 2001,
+      "episode": "2001_0",
+      "condition": "full",
+      "mask_seed": [
+        2001,
+        0,
+        0,
+        503
+      ],
+      "file": "view_2001_0_full.npz"
+    },
+    {
+      "graph": 2001,
+      "episode": "2001_0",
+      "condition": "scattered",
+      "mask_seed": [
+        2001,
+        0,
+        1,
+        503
+      ],
+      "file": "view_2001_0_scattered.npz"
+    },
+    {
+      "graph": 2001,
+      "episode": "2001_0",
+      "condition": "random_persistent",
+      "mask_seed": [
+        2001,
+        0,
+        2,
+        503
+      ],
+      "file": "view_2001_0_random_persistent.npz"
+    },
+    {
+      "graph": 2001,
+      "episode": "2001_1",
+      "condition": "full",
+      "mask_seed": [
+        2001,
+        1,
+        0,
+        503
+      ],
+      "file": "view_2001_1_full.npz"
+    },
+    {
+      "graph": 2001,
+      "episode": "2001_1",
+      "condition": "scattered",
+      "mask_seed": [
+        2001,
+        1,
+        1,
+        503
+      ],
+      "file": "view_2001_1_scattered.npz"
+    },
+    {
+      "graph": 2001,
+      "episode": "2001_1",
+      "condition": "random_persistent",
+      "mask_seed": [
+        2001,
+        1,
+        2,
+        503
+      ],
+      "file": "view_2001_1_random_persistent.npz"
+    },
+    {
+      "graph": 2002,
+      "episode": "2002_0",
+      "condition": "full",
+      "mask_seed": [
+        2002,
+        0,
+        0,
+        503
+      ],
+      "file": "view_2002_0_full.npz"
+    },
+    {
+      "graph": 2002,
+      "episode": "2002_0",
+      "condition": "scattered",
+      "mask_seed": [
+        2002,
+        0,
+        1,
+        503
+      ],
+      "file": "view_2002_0_scattered.npz"
+    },
+    {
+      "graph": 2002,
+      "episode": "2002_0",
+      "condition": "random_persistent",
+      "mask_seed": [
+        2002,
+        0,
+        2,
+        503
+      ],
+      "file": "view_2002_0_random_persistent.npz"
+    },
+    {
+      "graph": 2002,
+      "episode": "2002_1",
+      "condition": "full",
+      "mask_seed": [
+        2002,
+        1,
+        0,
+        503
+      ],
+      "file": "view_2002_1_full.npz"
+    },
+    {
+      "graph": 2002,
+      "episode": "2002_1",
+      "condition": "scattered",
+      "mask_seed": [
+        2002,
+        1,
+        1,
+        503
+      ],
+      "file": "view_2002_1_scattered.npz"
+    },
+    {
+      "graph": 2002,
+      "episode": "2002_1",
+      "condition": "random_persistent",
+      "mask_seed": [
+        2002,
+        1,
+        2,
+        503
+      ],
+      "file": "view_2002_1_random_persistent.npz"
+    },
+    {
+      "graph": 2003,
+      "episode": "2003_0",
+      "condition": "full",
+      "mask_seed": [
+        2003,
+        0,
+        0,
+        503
+      ],
+      "file": "view_2003_0_full.npz"
+    },
+    {
+      "graph": 2003,
+      "episode": "2003_0",
+      "condition": "scattered",
+      "mask_seed": [
+        2003,
+        0,
+        1,
+        503
+      ],
+      "file": "view_2003_0_scattered.npz"
+    },
+    {
+      "graph": 2003,
+      "episode": "2003_0",
+      "condition": "random_persistent",
+      "mask_seed": [
+        2003,
+        0,
+        2,
+        503
+      ],
+      "file": "view_2003_0_random_persistent.npz"
+    },
+    {
+      "graph": 2003,
+      "episode": "2003_1",
+      "condition": "full",
+      "mask_seed": [
+        2003,
+        1,
+        0,
+        503
+      ],
+      "file": "view_2003_1_full.npz"
+    },
+    {
+      "graph": 2003,
+      "episode": "2003_1",
+      "condition": "scattered",
+      "mask_seed": [
+        2003,
+        1,
+        1,
+        503
+      ],
+      "file": "view_2003_1_scattered.npz"
+    },
+    {
+      "graph": 2003,
+      "episode": "2003_1",
+      "condition": "random_persistent",
+      "mask_seed": [
+        2003,
+        1,
+        2,
+        503
+      ],
+      "file": "view_2003_1_random_persistent.npz"
+    },
+    {
+      "graph": 3000,
+      "episode": "3000_0",
+      "condition": "full",
+      "mask_seed": [
+        3000,
+        0,
+        0,
+        503
+      ],
+      "file": "view_3000_0_full.npz"
+    },
+    {
+      "graph": 3000,
+      "episode": "3000_0",
+      "condition": "scattered",
+      "mask_seed": [
+        3000,
+        0,
+        1,
+        503
+      ],
+      "file": "view_3000_0_scattered.npz"
+    },
+    {
+      "graph": 3000,
+      "episode": "3000_0",
+      "condition": "random_persistent",
+      "mask_seed": [
+        3000,
+        0,
+        2,
+        503
+      ],
+      "file": "view_3000_0_random_persistent.npz"
+    },
+    {
+      "graph": 3000,
+      "episode": "3000_0",
+      "condition": "bridge_persistent",
+      "mask_seed": [
+        3000,
+        0,
+        3,
+        503
+      ],
+      "file": "view_3000_0_bridge_persistent.npz"
+    },
+    {
+      "graph": 3000,
+      "episode": "3000_0",
+      "condition": "degree_matched",
+      "mask_seed": [
+        3000,
+        0,
+        4,
+        503
+      ],
+      "file": "view_3000_0_degree_matched.npz"
+    },
+    {
+      "graph": 3000,
+      "episode": "3000_0",
+      "condition": "region_persistent",
+      "mask_seed": [
+        3000,
+        0,
+        5,
+        503
+      ],
+      "file": "view_3000_0_region_persistent.npz"
+    },
+    {
+      "graph": 3000,
+      "episode": "3000_1",
+      "condition": "full",
+      "mask_seed": [
+        3000,
+        1,
+        0,
+        503
+      ],
+      "file": "view_3000_1_full.npz"
+    },
+    {
+      "graph": 3000,
+      "episode": "3000_1",
+      "condition": "scattered",
+      "mask_seed": [
+        3000,
+        1,
+        1,
+        503
+      ],
+      "file": "view_3000_1_scattered.npz"
+    },
+    {
+      "graph": 3000,
+      "episode": "3000_1",
+      "condition": "random_persistent",
+      "mask_seed": [
+        3000,
+        1,
+        2,
+        503
+      ],
+      "file": "view_3000_1_random_persistent.npz"
+    },
+    {
+      "graph": 3000,
+      "episode": "3000_1",
+      "condition": "bridge_persistent",
+      "mask_seed": [
+        3000,
+        1,
+        3,
+        503
+      ],
+      "file": "view_3000_1_bridge_persistent.npz"
+    },
+    {
+      "graph": 3000,
+      "episode": "3000_1",
+      "condition": "degree_matched",
+      "mask_seed": [
+        3000,
+        1,
+        4,
+        503
+      ],
+      "file": "view_3000_1_degree_matched.npz"
+    },
+    {
+      "graph": 3000,
+      "episode": "3000_1",
+      "condition": "region_persistent",
+      "mask_seed": [
+        3000,
+        1,
+        5,
+        503
+      ],
+      "file": "view_3000_1_region_persistent.npz"
+    },
+    {
+      "graph": 3001,
+      "episode": "3001_0",
+      "condition": "full",
+      "mask_seed": [
+        3001,
+        0,
+        0,
+        503
+      ],
+      "file": "view_3001_0_full.npz"
+    },
+    {
+      "graph": 3001,
+      "episode": "3001_0",
+      "condition": "scattered",
+      "mask_seed": [
+        3001,
+        0,
+        1,
+        503
+      ],
+      "file": "view_3001_0_scattered.npz"
+    },
+    {
+      "graph": 3001,
+      "episode": "3001_0",
+      "condition": "random_persistent",
+      "mask_seed": [
+        3001,
+        0,
+        2,
+        503
+      ],
+      "file": "view_3001_0_random_persistent.npz"
+    },
+    {
+      "graph": 3001,
+      "episode": "3001_0",
+      "condition": "bridge_persistent",
+      "mask_seed": [
+        3001,
+        0,
+        3,
+        503
+      ],
+      "file": "view_3001_0_bridge_persistent.npz"
+    },
+    {
+      "graph": 3001,
+      "episode": "3001_0",
+      "condition": "degree_matched",
+      "mask_seed": [
+        3001,
+        0,
+        4,
+        503
+      ],
+      "file": "view_3001_0_degree_matched.npz"
+    },
+    {
+      "graph": 3001,
+      "episode": "3001_0",
+      "condition": "region_persistent",
+      "mask_seed": [
+        3001,
+        0,
+        5,
+        503
+      ],
+      "file": "view_3001_0_region_persistent.npz"
+    },
+    {
+      "graph": 3001,
+      "episode": "3001_1",
+      "condition": "full",
+      "mask_seed": [
+        3001,
+        1,
+        0,
+        503
+      ],
+      "file": "view_3001_1_full.npz"
+    },
+    {
+      "graph": 3001,
+      "episode": "3001_1",
+      "condition": "scattered",
+      "mask_seed": [
+        3001,
+        1,
+        1,
+        503
+      ],
+      "file": "view_3001_1_scattered.npz"
+    },
+    {
+      "graph": 3001,
+      "episode": "3001_1",
+      "condition": "random_persistent",
+      "mask_seed": [
+        3001,
+        1,
+        2,
+        503
+      ],
+      "file": "view_3001_1_random_persistent.npz"
+    },
+    {
+      "graph": 3001,
+      "episode": "3001_1",
+      "condition": "bridge_persistent",
+      "mask_seed": [
+        3001,
+        1,
+        3,
+        503
+      ],
+      "file": "view_3001_1_bridge_persistent.npz"
+    },
+    {
+      "graph": 3001,
+      "episode": "3001_1",
+      "condition": "degree_matched",
+      "mask_seed": [
+        3001,
+        1,
+        4,
+        503
+      ],
+      "file": "view_3001_1_degree_matched.npz"
+    },
+    {
+      "graph": 3001,
+      "episode": "3001_1",
+      "condition": "region_persistent",
+      "mask_seed": [
+        3001,
+        1,
+        5,
+        503
+      ],
+      "file": "view_3001_1_region_persistent.npz"
+    },
+    {
+      "graph": 3002,
+      "episode": "3002_0",
+      "condition": "full",
+      "mask_seed": [
+        3002,
+        0,
+        0,
+        503
+      ],
+      "file": "view_3002_0_full.npz"
+    },
+    {
+      "graph": 3002,
+      "episode": "3002_0",
+      "condition": "scattered",
+      "mask_seed": [
+        3002,
+        0,
+        1,
+        503
+      ],
+      "file": "view_3002_0_scattered.npz"
+    },
+    {
+      "graph": 3002,
+      "episode": "3002_0",
+      "condition": "random_persistent",
+      "mask_seed": [
+        3002,
+        0,
+        2,
+        503
+      ],
+      "file": "view_3002_0_random_persistent.npz"
+    },
+    {
+      "graph": 3002,
+      "episode": "3002_0",
+      "condition": "bridge_persistent",
+      "mask_seed": [
+        3002,
+        0,
+        3,
+        503
+      ],
+      "file": "view_3002_0_bridge_persistent.npz"
+    },
+    {
+      "graph": 3002,
+      "episode": "3002_0",
+      "condition": "degree_matched",
+      "mask_seed": [
+        3002,
+        0,
+        4,
+        503
+      ],
+      "file": "view_3002_0_degree_matched.npz"
+    },
+    {
+      "graph": 3002,
+      "episode": "3002_0",
+      "condition": "region_persistent",
+      "mask_seed": [
+        3002,
+        0,
+        5,
+        503
+      ],
+      "file": "view_3002_0_region_persistent.npz"
+    },
+    {
+      "graph": 3002,
+      "episode": "3002_1",
+      "condition": "full",
+      "mask_seed": [
+        3002,
+        1,
+        0,
+        503
+      ],
+      "file": "view_3002_1_full.npz"
+    },
+    {
+      "graph": 3002,
+      "episode": "3002_1",
+      "condition": "scattered",
+      "mask_seed": [
+        3002,
+        1,
+        1,
+        503
+      ],
+      "file": "view_3002_1_scattered.npz"
+    },
+    {
+      "graph": 3002,
+      "episode": "3002_1",
+      "condition": "random_persistent",
+      "mask_seed": [
+        3002,
+        1,
+        2,
+        503
+      ],
+      "file": "view_3002_1_random_persistent.npz"
+    },
+    {
+      "graph": 3002,
+      "episode": "3002_1",
+      "condition": "bridge_persistent",
+      "mask_seed": [
+        3002,
+        1,
+        3,
+        503
+      ],
+      "file": "view_3002_1_bridge_persistent.npz"
+    },
+    {
+      "graph": 3002,
+      "episode": "3002_1",
+      "condition": "degree_matched",
+      "mask_seed": [
+        3002,
+        1,
+        4,
+        503
+      ],
+      "file": "view_3002_1_degree_matched.npz"
+    },
+    {
+      "graph": 3002,
+      "episode": "3002_1",
+      "condition": "region_persistent",
+      "mask_seed": [
+        3002,
+        1,
+        5,
+        503
+      ],
+      "file": "view_3002_1_region_persistent.npz"
+    },
+    {
+      "graph": 3003,
+      "episode": "3003_0",
+      "condition": "full",
+      "mask_seed": [
+        3003,
+        0,
+        0,
+        503
+      ],
+      "file": "view_3003_0_full.npz"
+    },
+    {
+      "graph": 3003,
+      "episode": "3003_0",
+      "condition": "scattered",
+      "mask_seed": [
+        3003,
+        0,
+        1,
+        503
+      ],
+      "file": "view_3003_0_scattered.npz"
+    },
+    {
+      "graph": 3003,
+      "episode": "3003_0",
+      "condition": "random_persistent",
+      "mask_seed": [
+        3003,
+        0,
+        2,
+        503
+      ],
+      "file": "view_3003_0_random_persistent.npz"
+    },
+    {
+      "graph": 3003,
+      "episode": "3003_0",
+      "condition": "bridge_persistent",
+      "mask_seed": [
+        3003,
+        0,
+        3,
+        503
+      ],
+      "file": "view_3003_0_bridge_persistent.npz"
+    },
+    {
+      "graph": 3003,
+      "episode": "3003_0",
+      "condition": "degree_matched",
+      "mask_seed": [
+        3003,
+        0,
+        4,
+        503
+      ],
+      "file": "view_3003_0_degree_matched.npz"
+    },
+    {
+      "graph": 3003,
+      "episode": "3003_0",
+      "condition": "region_persistent",
+      "mask_seed": [
+        3003,
+        0,
+        5,
+        503
+      ],
+      "file": "view_3003_0_region_persistent.npz"
+    },
+    {
+      "graph": 3003,
+      "episode": "3003_1",
+      "condition": "full",
+      "mask_seed": [
+        3003,
+        1,
+        0,
+        503
+      ],
+      "file": "view_3003_1_full.npz"
+    },
+    {
+      "graph": 3003,
+      "episode": "3003_1",
+      "condition": "scattered",
+      "mask_seed": [
+        3003,
+        1,
+        1,
+        503
+      ],
+      "file": "view_3003_1_scattered.npz"
+    },
+    {
+      "graph": 3003,
+      "episode": "3003_1",
+      "condition": "random_persistent",
+      "mask_seed": [
+        3003,
+        1,
+        2,
+        503
+      ],
+      "file": "view_3003_1_random_persistent.npz"
+    },
+    {
+      "graph": 3003,
+      "episode": "3003_1",
+      "condition": "bridge_persistent",
+      "mask_seed": [
+        3003,
+        1,
+        3,
+        503
+      ],
+      "file": "view_3003_1_bridge_persistent.npz"
+    },
+    {
+      "graph": 3003,
+      "episode": "3003_1",
+      "condition": "degree_matched",
+      "mask_seed": [
+        3003,
+        1,
+        4,
+        503
+      ],
+      "file": "view_3003_1_degree_matched.npz"
+    },
+    {
+      "graph": 3003,
+      "episode": "3003_1",
+      "condition": "region_persistent",
+      "mask_seed": [
+        3003,
+        1,
+        5,
+        503
+      ],
+      "file": "view_3003_1_region_persistent.npz"
+    },
+    {
+      "graph": 3004,
+      "episode": "3004_0",
+      "condition": "full",
+      "mask_seed": [
+        3004,
+        0,
+        0,
+        503
+      ],
+      "file": "view_3004_0_full.npz"
+    },
+    {
+      "graph": 3004,
+      "episode": "3004_0",
+      "condition": "scattered",
+      "mask_seed": [
+        3004,
+        0,
+        1,
+        503
+      ],
+      "file": "view_3004_0_scattered.npz"
+    },
+    {
+      "graph": 3004,
+      "episode": "3004_0",
+      "condition": "random_persistent",
+      "mask_seed": [
+        3004,
+        0,
+        2,
+        503
+      ],
+      "file": "view_3004_0_random_persistent.npz"
+    },
+    {
+      "graph": 3004,
+      "episode": "3004_0",
+      "condition": "bridge_persistent",
+      "mask_seed": [
+        3004,
+        0,
+        3,
+        503
+      ],
+      "file": "view_3004_0_bridge_persistent.npz"
+    },
+    {
+      "graph": 3004,
+      "episode": "3004_0",
+      "condition": "degree_matched",
+      "mask_seed": [
+        3004,
+        0,
+        4,
+        503
+      ],
+      "file": "view_3004_0_degree_matched.npz"
+    },
+    {
+      "graph": 3004,
+      "episode": "3004_0",
+      "condition": "region_persistent",
+      "mask_seed": [
+        3004,
+        0,
+        5,
+        503
+      ],
+      "file": "view_3004_0_region_persistent.npz"
+    },
+    {
+      "graph": 3004,
+      "episode": "3004_1",
+      "condition": "full",
+      "mask_seed": [
+        3004,
+        1,
+        0,
+        503
+      ],
+      "file": "view_3004_1_full.npz"
+    },
+    {
+      "graph": 3004,
+      "episode": "3004_1",
+      "condition": "scattered",
+      "mask_seed": [
+        3004,
+        1,
+        1,
+        503
+      ],
+      "file": "view_3004_1_scattered.npz"
+    },
+    {
+      "graph": 3004,
+      "episode": "3004_1",
+      "condition": "random_persistent",
+      "mask_seed": [
+        3004,
+        1,
+        2,
+        503
+      ],
+      "file": "view_3004_1_random_persistent.npz"
+    },
+    {
+      "graph": 3004,
+      "episode": "3004_1",
+      "condition": "bridge_persistent",
+      "mask_seed": [
+        3004,
+        1,
+        3,
+        503
+      ],
+      "file": "view_3004_1_bridge_persistent.npz"
+    },
+    {
+      "graph": 3004,
+      "episode": "3004_1",
+      "condition": "degree_matched",
+      "mask_seed": [
+        3004,
+        1,
+        4,
+        503
+      ],
+      "file": "view_3004_1_degree_matched.npz"
+    },
+    {
+      "graph": 3004,
+      "episode": "3004_1",
+      "condition": "region_persistent",
+      "mask_seed": [
+        3004,
+        1,
+        5,
+        503
+      ],
+      "file": "view_3004_1_region_persistent.npz"
+    },
+    {
+      "graph": 3005,
+      "episode": "3005_0",
+      "condition": "full",
+      "mask_seed": [
+        3005,
+        0,
+        0,
+        503
+      ],
+      "file": "view_3005_0_full.npz"
+    },
+    {
+      "graph": 3005,
+      "episode": "3005_0",
+      "condition": "scattered",
+      "mask_seed": [
+        3005,
+        0,
+        1,
+        503
+      ],
+      "file": "view_3005_0_scattered.npz"
+    },
+    {
+      "graph": 3005,
+      "episode": "3005_0",
+      "condition": "random_persistent",
+      "mask_seed": [
+        3005,
+        0,
+        2,
+        503
+      ],
+      "file": "view_3005_0_random_persistent.npz"
+    },
+    {
+      "graph": 3005,
+      "episode": "3005_0",
+      "condition": "bridge_persistent",
+      "mask_seed": [
+        3005,
+        0,
+        3,
+        503
+      ],
+      "file": "view_3005_0_bridge_persistent.npz"
+    },
+    {
+      "graph": 3005,
+      "episode": "3005_0",
+      "condition": "degree_matched",
+      "mask_seed": [
+        3005,
+        0,
+        4,
+        503
+      ],
+      "file": "view_3005_0_degree_matched.npz"
+    },
+    {
+      "graph": 3005,
+      "episode": "3005_0",
+      "condition": "region_persistent",
+      "mask_seed": [
+        3005,
+        0,
+        5,
+        503
+      ],
+      "file": "view_3005_0_region_persistent.npz"
+    },
+    {
+      "graph": 3005,
+      "episode": "3005_1",
+      "condition": "full",
+      "mask_seed": [
+        3005,
+        1,
+        0,
+        503
+      ],
+      "file": "view_3005_1_full.npz"
+    },
+    {
+      "graph": 3005,
+      "episode": "3005_1",
+      "condition": "scattered",
+      "mask_seed": [
+        3005,
+        1,
+        1,
+        503
+      ],
+      "file": "view_3005_1_scattered.npz"
+    },
+    {
+      "graph": 3005,
+      "episode": "3005_1",
+      "condition": "random_persistent",
+      "mask_seed": [
+        3005,
+        1,
+        2,
+        503
+      ],
+      "file": "view_3005_1_random_persistent.npz"
+    },
+    {
+      "graph": 3005,
+      "episode": "3005_1",
+      "condition": "bridge_persistent",
+      "mask_seed": [
+        3005,
+        1,
+        3,
+        503
+      ],
+      "file": "view_3005_1_bridge_persistent.npz"
+    },
+    {
+      "graph": 3005,
+      "episode": "3005_1",
+      "condition": "degree_matched",
+      "mask_seed": [
+        3005,
+        1,
+        4,
+        503
+      ],
+      "file": "view_3005_1_degree_matched.npz"
+    },
+    {
+      "graph": 3005,
+      "episode": "3005_1",
+      "condition": "region_persistent",
+      "mask_seed": [
+        3005,
+        1,
+        5,
+        503
+      ],
+      "file": "view_3005_1_region_persistent.npz"
+    },
+    {
+      "graph": 3006,
+      "episode": "3006_0",
+      "condition": "full",
+      "mask_seed": [
+        3006,
+        0,
+        0,
+        503
+      ],
+      "file": "view_3006_0_full.npz"
+    },
+    {
+      "graph": 3006,
+      "episode": "3006_0",
+      "condition": "scattered",
+      "mask_seed": [
+        3006,
+        0,
+        1,
+        503
+      ],
+      "file": "view_3006_0_scattered.npz"
+    },
+    {
+      "graph": 3006,
+      "episode": "3006_0",
+      "condition": "random_persistent",
+      "mask_seed": [
+        3006,
+        0,
+        2,
+        503
+      ],
+      "file": "view_3006_0_random_persistent.npz"
+    },
+    {
+      "graph": 3006,
+      "episode": "3006_0",
+      "condition": "bridge_persistent",
+      "mask_seed": [
+        3006,
+        0,
+        3,
+        503
+      ],
+      "file": "view_3006_0_bridge_persistent.npz"
+    },
+    {
+      "graph": 3006,
+      "episode": "3006_0",
+      "condition": "degree_matched",
+      "mask_seed": [
+        3006,
+        0,
+        4,
+        503
+      ],
+      "file": "view_3006_0_degree_matched.npz"
+    },
+    {
+      "graph": 3006,
+      "episode": "3006_0",
+      "condition": "region_persistent",
+      "mask_seed": [
+        3006,
+        0,
+        5,
+        503
+      ],
+      "file": "view_3006_0_region_persistent.npz"
+    },
+    {
+      "graph": 3006,
+      "episode": "3006_1",
+      "condition": "full",
+      "mask_seed": [
+        3006,
+        1,
+        0,
+        503
+      ],
+      "file": "view_3006_1_full.npz"
+    },
+    {
+      "graph": 3006,
+      "episode": "3006_1",
+      "condition": "scattered",
+      "mask_seed": [
+        3006,
+        1,
+        1,
+        503
+      ],
+      "file": "view_3006_1_scattered.npz"
+    },
+    {
+      "graph": 3006,
+      "episode": "3006_1",
+      "condition": "random_persistent",
+      "mask_seed": [
+        3006,
+        1,
+        2,
+        503
+      ],
+      "file": "view_3006_1_random_persistent.npz"
+    },
+    {
+      "graph": 3006,
+      "episode": "3006_1",
+      "condition": "bridge_persistent",
+      "mask_seed": [
+        3006,
+        1,
+        3,
+        503
+      ],
+      "file": "view_3006_1_bridge_persistent.npz"
+    },
+    {
+      "graph": 3006,
+      "episode": "3006_1",
+      "condition": "degree_matched",
+      "mask_seed": [
+        3006,
+        1,
+        4,
+        503
+      ],
+      "file": "view_3006_1_degree_matched.npz"
+    },
+    {
+      "graph": 3006,
+      "episode": "3006_1",
+      "condition": "region_persistent",
+      "mask_seed": [
+        3006,
+        1,
+        5,
+        503
+      ],
+      "file": "view_3006_1_region_persistent.npz"
+    },
+    {
+      "graph": 3007,
+      "episode": "3007_0",
+      "condition": "full",
+      "mask_seed": [
+        3007,
+        0,
+        0,
+        503
+      ],
+      "file": "view_3007_0_full.npz"
+    },
+    {
+      "graph": 3007,
+      "episode": "3007_0",
+      "condition": "scattered",
+      "mask_seed": [
+        3007,
+        0,
+        1,
+        503
+      ],
+      "file": "view_3007_0_scattered.npz"
+    },
+    {
+      "graph": 3007,
+      "episode": "3007_0",
+      "condition": "random_persistent",
+      "mask_seed": [
+        3007,
+        0,
+        2,
+        503
+      ],
+      "file": "view_3007_0_random_persistent.npz"
+    },
+    {
+      "graph": 3007,
+      "episode": "3007_0",
+      "condition": "bridge_persistent",
+      "mask_seed": [
+        3007,
+        0,
+        3,
+        503
+      ],
+      "file": "view_3007_0_bridge_persistent.npz"
+    },
+    {
+      "graph": 3007,
+      "episode": "3007_0",
+      "condition": "degree_matched",
+      "mask_seed": [
+        3007,
+        0,
+        4,
+        503
+      ],
+      "file": "view_3007_0_degree_matched.npz"
+    },
+    {
+      "graph": 3007,
+      "episode": "3007_0",
+      "condition": "region_persistent",
+      "mask_seed": [
+        3007,
+        0,
+        5,
+        503
+      ],
+      "file": "view_3007_0_region_persistent.npz"
+    },
+    {
+      "graph": 3007,
+      "episode": "3007_1",
+      "condition": "full",
+      "mask_seed": [
+        3007,
+        1,
+        0,
+        503
+      ],
+      "file": "view_3007_1_full.npz"
+    },
+    {
+      "graph": 3007,
+      "episode": "3007_1",
+      "condition": "scattered",
+      "mask_seed": [
+        3007,
+        1,
+        1,
+        503
+      ],
+      "file": "view_3007_1_scattered.npz"
+    },
+    {
+      "graph": 3007,
+      "episode": "3007_1",
+      "condition": "random_persistent",
+      "mask_seed": [
+        3007,
+        1,
+        2,
+        503
+      ],
+      "file": "view_3007_1_random_persistent.npz"
+    },
+    {
+      "graph": 3007,
+      "episode": "3007_1",
+      "condition": "bridge_persistent",
+      "mask_seed": [
+        3007,
+        1,
+        3,
+        503
+      ],
+      "file": "view_3007_1_bridge_persistent.npz"
+    },
+    {
+      "graph": 3007,
+      "episode": "3007_1",
+      "condition": "degree_matched",
+      "mask_seed": [
+        3007,
+        1,
+        4,
+        503
+      ],
+      "file": "view_3007_1_degree_matched.npz"
+    },
+    {
+      "graph": 3007,
+      "episode": "3007_1",
+      "condition": "region_persistent",
+      "mask_seed": [
+        3007,
+        1,
+        5,
+        503
+      ],
+      "file": "view_3007_1_region_persistent.npz"
+    }
+  ]
+}

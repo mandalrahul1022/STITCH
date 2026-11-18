@@ -1,0 +1,19 @@
+{
+  "tests": {
+    "test_01_distinct_graph_hashes_and_disjoint_splits": "PASS",
+    "test_02_capture_before_progression_or_patch": "PASS",
+    "test_03_hidden_truth_invariant": "PASS",
+    "test_04_prefix_only": "PASS",
+    "test_05_prior_events_excluded": "PASS",
+    "test_06_equal_mask_budgets": "PASS",
+    "test_07_degree_balance": "PASS",
+    "test_08_tiny_graph_within_tick": "PASS",
+    "test_09_horizon_edges": "PASS",
+    "test_10_input_schema_and_clock_queue_exclusion": "PASS",
+    "test_11_P_only_from_reference_observed_I_in_queue": "PASS"
+  },
+  "counts": {
+    "patches": 4114,
+    "queued_and_patched_same_tick": 1432
+  }
+}

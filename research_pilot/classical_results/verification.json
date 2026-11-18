@@ -1,0 +1,9 @@
+{
+  "test_01_future_event_and_earliest_positive_lead": "PASS",
+  "test_02_candidate_filter_ties_and_budget": "PASS",
+  "test_03_mask_only_and_causal_model_inputs": "PASS",
+  "test_04_filter_mass_and_observed_state": "PASS",
+  "test_05_frozen_splits_and_complete_score_grid": "PASS",
+  "test_06_all_saved_scores_respect_confirmation": "PASS",
+  "test_07_bridge_diagnostic_and_primary_population": "PASS"
+}

@@ -1,0 +1,18 @@
+{
+  "base_commit": "43ca102ee8de944acf2177cb915db945999d08f9",
+  "stage": "2",
+  "sha256": {
+    "README.md": "c4bd03987338e7cf671b37735afde0f0d4cf89110f89aa12f0aedb062e865a6b",
+    "archive_graphs.py": "32099b4a0c9f90dcbb42c7a0abadb69e138e56d067b4bf0ccdadd71e4342651b",
+    "classical.py": "3dd88d69bbfc6119f35be1f14ba4a23a48617363e9f69f6dd68a093721a593f7",
+    "compare_trajectories.py": "64722514e2a2187f1055ce25bb077d336f21b375b31a758e071e3c77326ae3c3",
+    "metrics.py": "5d0abb85cc92a5e2d84b14535645cb32bfeda5e0ee7f62048974dc57c00b036e",
+    "pilot.py": "f4a05041afd7a168053c82f1e1bdcf5e618af886621dcd7206be8b5554049500",
+    "requirements-pilot.txt": "f2872d684d500097760266c5eb6598e21c65178b1afe15bf3443d4bc31f37c03",
+    "stage1.py": "966af5f9f372b917cb5bdad072cb73428eedc49e179d99b7cbf2ac705894dfe1",
+    "stage2.py": "d5e29e0d55f14508acc515c162fedee073fbbb9784056d58e35a4e2d108f57ac",
+    "topology.py": "790070c197de4f4c04a326a6c0f59cb0979abd3ac740ffb6d98ce6473744f678",
+    "verify.py": "615e00afd86159eeb4d673915b10d8d52a5a615a8f88c03ca8d8dbc8ea7505b9",
+    "verify_classical.py": "1d03fa40521461a9c6daa6575f7b9ff9033b0be2cdaf616802d6aba04f08c9aa"
+  }
+}
