@@ -1,7 +1,7 @@
 {
   "base_commit": "43ca102ee8de944acf2177cb915db945999d08f9",
-  "combined_sha256": "cf57887c03b6172eedbf051b5813a7d6cd49df7d579f1bbb3c97e683bfb454a4",
-  "n_files": 16,
+  "combined_sha256": "b985f68ec7751419e3b092110cc19a8bc05f609b2bae5fb2443f549e2b51b0ff",
+  "n_files": 17,
   "normalization": "CRLF->LF for text suffixes .cfg,.csv,.ini,.json,.jsonl,.log,.md,.py,.toml,.txt,.yaml,.yml",
   "excluded": [
     "results/",
@@ -26,6 +26,7 @@
     "tests/test_stage1.py": "b1ff27adf170614db9299bd96ec802937d11e6db1142548a1e92b64e9903ef91",
     "tools/code_hash.py": "731256d9c6340647641f38dc8b7f6b49d31c2b5fbc2b05e30ef2ed7920ec0101",
     "tools/env_check.py": "154b1949ee8594fe8389be1e7f4d9d5ffc4a2a3230b7b60e580113c7373f6efe",
+    "tools/trace_host.py": "584ebe2c6db7e09cd352068cb0f56d90a2c4c6502b2b43829ede143e1b395751",
     "topology.py": "790070c197de4f4c04a326a6c0f59cb0979abd3ac740ffb6d98ce6473744f678",
     "verify.py": "615e00afd86159eeb4d673915b10d8d52a5a615a8f88c03ca8d8dbc8ea7505b9",
     "verify_classical.py": "1d03fa40521461a9c6daa6575f7b9ff9033b0be2cdaf616802d6aba04f08c9aa"

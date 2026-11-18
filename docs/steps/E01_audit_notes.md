@@ -121,3 +121,162 @@ The implemented T10b tests the property the spec check protects, that every cond
 This is stronger in two ways. A view built from any other trajectory differs in at least one visible cell, so the check fails. It also pins each mask to its recorded seed, which a hash comparison does not.
 
 The one difference it cannot detect is a trajectory that differs only in cells hidden in that view. Those cells cannot reach the inputs (T03). Labels and the reference defender's queue history are read only from the single stored episode file, which every condition shares by episode ID (`stage2.py`, `views`). A negative control (one flipped availability cell in a copy of the data) made T06, T10 and T10b fail.
+
+## C04 traces
+
+Produced by `research_pilot/tools/trace_host.py` on the C03 data. Every value below is printed by the tool. The tool decodes each compact channel cell back to the stored floats and stops if the encoding is lossy. True state, queue and reference membership are shown for audit only; they are not model inputs.
+
+Commands:
+
+```powershell
+.\.venv\Scripts\python.exe -m research_pilot.tools.trace_host --data research_pilot\results\stage1\run_a --episode 3000_0 --host 7 --origins 11,13,15,17,19
+.\.venv\Scripts\python.exe -m research_pilot.tools.trace_host --fixture t08
+```
+
+Host selection rule (fixed before looking at the trace): the first test episode in ID order that has a bridge-set host with `C(v) = 18`, then the lowest such host ID. `C = 18` puts the event inside the outage, and with odd origins the label must be 1 at t = 13, 15, 17 and 0 at t = 11 and 19. Result: episode 3000_0, host 7. This host is also in the degree-matched and region sets of graph 3000, so it is hidden for the whole outage under all three held-out masks.
+
+Cell format: `<visible state or -> a<age> k<channel 6>`; channel 7 is constant per host and printed once.
+
+﻿### Episode 3000_0, host 7
+
+- split test, graph 3000 (BA), beta 0.04, outbreak seed 303777
+- degree 16; channel 7 (normalized log-degree) = 0.7906
+- C(v) = 18; reference-observed (NOT AN INPUT): True
+- member of held-out host sets: bridge_persistent, degree_matched, region_persistent
+- fitted_mechanistic (fitted on 24 training full views): hazard 0.05122, progress 0.49573, remove 0.04975
+
+| tick | true | queue (NOT AN INPUT) | full | scattered | random_persistent | bridge_persistent | degree_matched | region_persistent |
+|---|---|---|---|---|---|---|---|---|
+| 0 | S | 0 | S a00 k0 | S a00 k0 | S a00 k0 | S a00 k0 | S a00 k0 | S a00 k0 |
+| 1 | S | 0 | S a00 k0 | S a00 k0 | S a00 k0 | S a00 k0 | S a00 k0 | S a00 k0 |
+| 2 | S | 0 | S a00 k0 | S a00 k0 | S a00 k0 | S a00 k0 | S a00 k0 | S a00 k0 |
+| 3 | S | 0 | S a00 k0 | S a00 k0 | S a00 k0 | S a00 k0 | S a00 k0 | S a00 k0 |
+| 4 | S | 0 | S a00 k0 | S a00 k0 | S a00 k0 | S a00 k0 | S a00 k0 | S a00 k0 |
+| 5 | S | 0 | S a00 k0 | S a00 k0 | S a00 k0 | S a00 k0 | S a00 k0 | S a00 k0 |
+| 6 | S | 0 | S a00 k0 | S a00 k0 | S a00 k0 | S a00 k0 | S a00 k0 | S a00 k0 |
+| 7 | S | 0 | S a00 k0 | S a00 k0 | S a00 k0 | S a00 k0 | S a00 k0 | S a00 k0 |
+| 8 | S | 0 | S a00 k0 | S a00 k0 | S a00 k0 | S a00 k0 | S a00 k0 | S a00 k0 |
+| 9 | S | 0 | S a00 k0 | S a00 k0 | S a00 k0 | S a00 k0 | S a00 k0 | S a00 k0 |
+| 10 | S | 0 | S a00 k0 | S a00 k0 | S a00 k0 | S a00 k0 | S a00 k0 | S a00 k0 |
+| 11 | S | 0 | S a00 k0 | S a00 k0 | S a00 k0 | S a00 k0 | S a00 k0 | S a00 k0 |
+| 12 | S | 0 | S a00 k0 | S a00 k0 | S a00 k0 | - a01 k0 | - a01 k0 | - a01 k0 |
+| 13 | S | 0 | S a00 k0 | S a00 k0 | S a00 k0 | - a02 k0 | - a02 k0 | - a02 k0 |
+| 14 | S | 0 | S a00 k0 | S a00 k0 | S a00 k0 | - a03 k0 | - a03 k0 | - a03 k0 |
+| 15 | S | 0 | S a00 k0 | S a00 k0 | S a00 k0 | - a04 k0 | - a04 k0 | - a04 k0 |
+| 16 | S | 0 | S a00 k0 | S a00 k0 | S a00 k0 | - a05 k0 | - a05 k0 | - a05 k0 |
+| 17 | S | 0 | S a00 k0 | - a01 k0 | S a00 k0 | - a06 k0 | - a06 k0 | - a06 k0 |
+| 18 | E | 0 | E a00 k1 | - a02 k0 | E a00 k1 | - a07 k0 | - a07 k0 | - a07 k0 |
+| 19 | I | 1 | I a00 k1 | I a00 k1 | I a00 k1 | - a08 k0 | - a08 k0 | - a08 k0 |
+| 20 | P | 0 | P a00 k1 | P a00 k1 | P a00 k1 | - a09 k0 | - a09 k0 | - a09 k0 |
+| 21 | P | 0 | P a00 k1 | P a00 k1 | P a00 k1 | - a10 k0 | - a10 k0 | - a10 k0 |
+| 22 | P | 0 | P a00 k1 | P a00 k1 | P a00 k1 | - a11 k0 | - a11 k0 | - a11 k0 |
+| 23 | P | 0 | P a00 k1 | P a00 k1 | P a00 k1 | - a12 k0 | - a12 k0 | - a12 k0 |
+| 24 | P | 0 | P a00 k1 | P a00 k1 | P a00 k1 | - a13 k0 | - a13 k0 | - a13 k0 |
+| 25 | P | 0 | P a00 k1 | - a01 k1 | P a00 k1 | - a14 k0 | - a14 k0 | - a14 k0 |
+| 26 | P | 0 | P a00 k1 | P a00 k1 | P a00 k1 | - a15 k0 | - a15 k0 | - a15 k0 |
+| 27 | P | 0 | P a00 k1 | - a01 k1 | P a00 k1 | - a16 k0 | - a16 k0 | - a16 k0 |
+| 28 | P | 0 | P a00 k1 | - a02 k1 | P a00 k1 | - a17 k0 | - a17 k0 | - a17 k0 |
+| 29 | P | 0 | P a00 k1 | - a03 k1 | P a00 k1 | - a18 k0 | - a18 k0 | - a18 k0 |
+| 30 | P | 0 | P a00 k1 | - a04 k1 | P a00 k1 | - a19 k0 | - a19 k0 | - a19 k0 |
+| 31 | P | 0 | P a00 k1 | P a00 k1 | P a00 k1 | - a20 k0 | - a20 k0 | - a20 k0 |
+| 32 | P | 0 | P a00 k1 | - a01 k1 | P a00 k1 | - a21 k0 | - a21 k0 | - a21 k0 |
+| 33 | P | 0 | P a00 k1 | P a00 k1 | P a00 k1 | - a22 k0 | - a22 k0 | - a22 k0 |
+| 34 | P | 0 | P a00 k1 | P a00 k1 | P a00 k1 | - a23 k0 | - a23 k0 | - a23 k0 |
+| 35 | P | 0 | P a00 k1 | P a00 k1 | P a00 k1 | - a24 k0 | - a24 k0 | - a24 k0 |
+| 36 | P | 0 | P a00 k1 | - a01 k1 | P a00 k1 | - a25 k0 | - a25 k0 | - a25 k0 |
+| 37 | P | 0 | P a00 k1 | - a02 k1 | P a00 k1 | - a26 k0 | - a26 k0 | - a26 k0 |
+| 38 | P | 0 | P a00 k1 | - a03 k1 | P a00 k1 | - a27 k0 | - a27 k0 | - a27 k0 |
+| 39 | P | 0 | P a00 k1 | - a04 k1 | P a00 k1 | - a28 k0 | - a28 k0 | - a28 k0 |
+| 40 | P | 0 | P a00 k1 | P a00 k1 | P a00 k1 | - a29 k0 | - a29 k0 | - a29 k0 |
+| 41 | P | 0 | P a00 k1 | P a00 k1 | P a00 k1 | - a30 k0 | - a30 k0 | - a30 k0 |
+| 42 | P | 0 | P a00 k1 | - a01 k1 | P a00 k1 | - a31 k0 | - a31 k0 | - a31 k0 |
+| 43 | P | 0 | P a00 k1 | P a00 k1 | P a00 k1 | - a32 k0 | - a32 k0 | - a32 k0 |
+| 44 | P | 0 | P a00 k1 | P a00 k1 | P a00 k1 | P a00 k1 | P a00 k1 | P a00 k1 |
+| 45 | P | 0 | P a00 k1 | P a00 k1 | P a00 k1 | P a00 k1 | P a00 k1 | P a00 k1 |
+| 46 | P | 0 | P a00 k1 | P a00 k1 | P a00 k1 | P a00 k1 | P a00 k1 | P a00 k1 |
+| 47 | P | 0 | P a00 k1 | P a00 k1 | P a00 k1 | P a00 k1 | P a00 k1 | P a00 k1 |
+| 48 | P | 0 | P a00 k1 | P a00 k1 | P a00 k1 | P a00 k1 | P a00 k1 | P a00 k1 |
+| 49 | P | 0 | P a00 k1 | P a00 k1 | P a00 k1 | P a00 k1 | P a00 k1 | P a00 k1 |
+| 50 | P | 0 | P a00 k1 | P a00 k1 | P a00 k1 | P a00 k1 | P a00 k1 | P a00 k1 |
+| 51 | P | 0 | P a00 k1 | P a00 k1 | P a00 k1 | P a00 k1 | P a00 k1 | P a00 k1 |
+| 52 | P | 0 | P a00 k1 | P a00 k1 | P a00 k1 | P a00 k1 | P a00 k1 | P a00 k1 |
+| 53 | P | 0 | P a00 k1 | P a00 k1 | P a00 k1 | P a00 k1 | P a00 k1 | P a00 k1 |
+| 54 | P | 0 | P a00 k1 | P a00 k1 | P a00 k1 | P a00 k1 | P a00 k1 | P a00 k1 |
+| 55 | P | 0 | P a00 k1 | P a00 k1 | P a00 k1 | P a00 k1 | P a00 k1 | P a00 k1 |
+| 56 | P | 0 | P a00 k1 | P a00 k1 | P a00 k1 | P a00 k1 | P a00 k1 | P a00 k1 |
+
+| origin t | y(v,t) | full: status, score | scattered: status, score | random_persistent: status, score | bridge_persistent: status, score | degree_matched: status, score | region_persistent: status, score |
+|---|---|---|---|---|---|---|---|
+| 11 | 0 | candidate, 0.0612 | candidate, 0.0612 | candidate, 0.0612 | candidate, 0.0612 | candidate, 0.0612 | candidate, 0.0612 |
+| 13 | 1 | candidate, 0.0612 | candidate, 0.0791 | candidate, 0.0988 | candidate, 0.1308 | candidate, 0.1318 | candidate, 0.1312 |
+| 15 | 1 | candidate, 0.0612 | candidate, 0.1218 | candidate, 0.1359 | candidate, 0.1993 | candidate, 0.2001 | candidate, 0.1987 |
+| 17 | 1 | candidate, 0.2887 | candidate, 0.2948 | candidate, 0.3611 | candidate, 0.2559 | candidate, 0.2554 | candidate, 0.2519 |
+| 19 | 0 | known, 0.0000 | known, 0.0000 | known, 0.0000 | candidate, 0.2524 | candidate, 0.2501 | candidate, 0.2544 |
+
+| check | result | detail |
+|---|---|---|
+| label is 1 exactly for C-5 <= t <= C-1 | PASS | C=18: y=1 for t=13..17, 0 at t=12 and t=18 |
+| full: hidden ticks have channels 0-4 all 0 | PASS | 0 hidden ticks |
+| full: channel 6 turns on only at a visible E/I/P tick | PASS | onset tick [18] |
+| scattered: hidden ticks have channels 0-4 all 0 | PASS | 13 hidden ticks |
+| scattered: channel 6 turns on only at a visible E/I/P tick | PASS | onset tick [19] |
+| random_persistent: hidden ticks have channels 0-4 all 0 | PASS | 0 hidden ticks |
+| random_persistent: channel 6 turns on only at a visible E/I/P tick | PASS | onset tick [18] |
+| bridge_persistent: hidden ticks have channels 0-4 all 0 | PASS | 32 hidden ticks |
+| bridge_persistent: channel 6 turns on only at a visible E/I/P tick | PASS | onset tick [44] |
+| degree_matched: hidden ticks have channels 0-4 all 0 | PASS | 32 hidden ticks |
+| degree_matched: channel 6 turns on only at a visible E/I/P tick | PASS | onset tick [44] |
+| region_persistent: hidden ticks have channels 0-4 all 0 | PASS | 32 hidden ticks |
+| region_persistent: channel 6 turns on only at a visible E/I/P tick | PASS | onset tick [44] |
+
+What the episode trace shows:
+
+- The label is 1 at origins 13, 15 and 17 and 0 at 11 and 19, and the full check confirms y = 1 exactly for t = 13..17 (C-5 to C-1).
+- Under bridge_persistent the host is compromised at tick 18, queued at 19 and patched at 20, all while hidden. Channel 6 stays 0 until the host is visible again at tick 44, so at origin 19 it is still a candidate. Its score there (0.2524) counts as a late alert in the metrics, because `C(v) <= t`.
+- Under full and random_persistent the observer sees E at tick 18, channel 6 turns on, and at origin 19 the score is forced to 0 (known host).
+- Under scattered the host is hidden at ticks 17 and 18 and first seen compromised as I at 19.
+- At origin 11 the window (ticks 4 to 11) precedes the outage, so all six conditions give the same score (0.0612).
+
+﻿### T08 fixture, host 1
+
+- 2 hosts, one edge; host 0 is I from tick 0 and not reference-observed; host 1 is reference-observed. Ticks 1-3 use beta 0; from tick 4, beta 1, volatility 0, progression 1, enqueue fraction 1, completion 1.
+- C(v) = 4; channel 7 = 1.0 (both hosts have degree 1)
+- Second view hides host 1 at ticks 3-5 to show channel 6 waiting for a visible tick.
+- No comparator score: the fixture has no fitted model.
+
+| tick | true | queue (NOT AN INPUT) | full | host1_hidden_t3_5 |
+|---|---|---|---|---|
+| 0 | S | 0 | S a00 k0 | S a00 k0 |
+| 1 | S | 0 | S a00 k0 | S a00 k0 |
+| 2 | S | 0 | S a00 k0 | S a00 k0 |
+| 3 | S | 0 | S a00 k0 | - a01 k0 |
+| 4 | P | 0 | P a00 k1 | - a02 k0 |
+| 5 | P | 0 | P a00 k1 | - a03 k0 |
+| 6 | P | 0 | P a00 k1 | P a00 k1 |
+| 7 | P | 0 | P a00 k1 | P a00 k1 |
+| 8 | P | 0 | P a00 k1 | P a00 k1 |
+| 9 | P | 0 | P a00 k1 | P a00 k1 |
+| 10 | P | 0 | P a00 k1 | P a00 k1 |
+
+| origin t | y(v,t) | full: status | host1_hidden_t3_5: status |
+|---|---|---|---|
+| 0 | 1 | candidate | candidate |
+| 1 | 1 | candidate | candidate |
+| 2 | 1 | candidate | candidate |
+| 3 | 1 | candidate | candidate |
+| 4 | 0 | known | candidate |
+| 5 | 0 | known | candidate |
+
+| check | result | detail |
+|---|---|---|
+| label is 1 exactly for C-5 <= t <= C-1 | PASS | C=4: y=1 for t=0..3, 0 at t=n/a and t=4 |
+| full: hidden ticks have channels 0-4 all 0 | PASS | 0 hidden ticks |
+| full: channel 6 turns on only at a visible E/I/P tick | PASS | onset tick [4] |
+| host1_hidden_t3_5: hidden ticks have channels 0-4 all 0 | PASS | 3 hidden ticks |
+| host1_hidden_t3_5: channel 6 turns on only at a visible E/I/P tick | PASS | onset tick [6] |
+
+What the fixture trace shows:
+
+- Host 1 goes S to E to I to P inside tick 4. The end-of-tick state history never shows E or I, but `C(v) = 4` is recorded, so the event survives (T02, T08).
+- The queue flag is 0 at every end of tick because the host entered the queue and completed in the same tick.
+- With host 1 hidden at ticks 3 to 5, channel 6 waits until tick 6, the first visible tick, and host 1 stays a candidate at origins 4 and 5.
