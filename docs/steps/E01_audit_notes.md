@@ -66,3 +66,15 @@ Statuses: MATCH (does what section 3 says), DEVIATION (differs from section 3 or
 | 25 | Add a finite-count column per metric to `summary.csv`. |
 | 26, 27 | Do in C03 as planned: pytest files under `research_pilot/tests/` with T-IDs, evidence strings, T10b and T10c. |
 | 28 | Either repin to the venv versions or install the pinned versions. Repinning is the lighter option given the measured 1.5e-6 effect. |
+
+### Decisions (Rahul, November 18, 2026: all proposals approved)
+
+| Item | Decision | Where |
+|------|----------|-------|
+| 6 | Keep queue entry from reference-observed I hosts only, the in-tick order (exposure, E to I, enqueue, completion) and half-to-even rounding. Contract wording to be stated in `docs/methods/simulator.md` (C15). | no code change |
+| 20 | Seed streams recorded in `manifest.json` (`config.seeds`) and `validation_selection.json` (`seeds`). | commit 3f8bb4d |
+| 21 | Archived-graph decision: the 24 September edge lists are replayed and hash-verified; no graph generator for Track A. To be documented in `docs/methods/simulator.md` (C15). | no code change |
+| 22 | Keep the extended truth hash; document it (C15). | no code change |
+| 23, 24, 25 | Bootstrap 10,000 resamples; per-episode ECE and `reliability.csv` (10 equal-mass bins); `n_<metric>` counts in `summary.csv`. | commit 11a959a |
+| 26, 27 | Handled in C03. | C03 |
+| 28 | `requirements-pilot.txt` repinned to the `.venv` versions, plus pytest 9.2.0 (installed for the C03 test suite). | this commit |
