@@ -1,10 +1,11 @@
-"""C01 code hash: SHA-256 per file under research_pilot/ plus one combined hash.
+"""C01 code hash: SHA-256 per source file under research_pilot/ plus one combined hash.
 
 Run from the repository root:
     python -m research_pilot.tools.code_hash [--check]
 
 Rules
-- Every file under research_pilot/ is hashed, except: results/, __pycache__/, files under
+- Every file under research_pilot/ is hashed, except: the output folders results/, data/ and
+  classical_results/, __pycache__/, files under
   tests/ larger than 1 MB, code_manifest.json itself (self-reference) and environment*.json
   (machine-specific runtime records that would change the hash on every machine).
 - Text files are hashed with CRLF converted to LF, so a Windows checkout (core.autocrlf=true)
@@ -23,11 +24,14 @@ BASE_COMMIT = "43ca102ee8de944acf2177cb915db945999d08f9"
 TEXT_SUFFIXES = {".py", ".md", ".txt", ".json", ".jsonl", ".csv", ".log", ".yaml", ".yml",
                  ".toml", ".cfg", ".ini"}
 FIXTURE_LIMIT = 1024 * 1024
+# Run outputs, not source. data/ and classical_results/ are the inherited Stage 1-2 output
+# folders; they are pinned by git and by data/manifest.json hashes instead.
+OUTPUT_DIRS = ("results", "data", "classical_results")
 
 
 def excluded(rel: Path, size: int) -> bool:
     parts = rel.parts
-    if parts[0] == "results" or "__pycache__" in parts or rel.suffix in (".pyc", ".pyo"):
+    if parts[0] in OUTPUT_DIRS or "__pycache__" in parts or rel.suffix in (".pyc", ".pyo"):
         return True
     if parts[0] == "tests" and size > FIXTURE_LIMIT:
         return True
@@ -54,7 +58,7 @@ def compute(root: Path = PILOT) -> dict:
         "combined_sha256": hashlib.sha256(lines.encode("utf-8")).hexdigest(),
         "n_files": len(files),
         "normalization": "CRLF->LF for text suffixes " + ",".join(sorted(TEXT_SUFFIXES)),
-        "excluded": ["results/", "__pycache__/", "tests/ files > 1 MB", "code_manifest.json",
+        "excluded": ["results/", "data/", "classical_results/", "__pycache__/", "tests/ files > 1 MB", "code_manifest.json",
                      "environment*.json (top level)"],
         "sha256": files,
     }
