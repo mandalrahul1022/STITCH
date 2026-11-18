@@ -1,0 +1,33 @@
+{
+  "python": "3.12.10",
+  "python_executable": "C:\\Users\\RMandal\\Desktop\\STITCH\\.venv\\Scripts\\python.exe",
+  "os": "Windows-11-10.0.26200-SP0",
+  "machine": "STEM-05",
+  "torch": "2.10.0+cu130",
+  "torch_cuda_build": "13.0",
+  "cuda_available": true,
+  "device": "cuda",
+  "device_name": "NVIDIA GeForce RTX 5090",
+  "compute_capability": [
+    12,
+    0
+  ],
+  "cudnn": 91200,
+  "cuda_visible_devices": null,
+  "packages": {
+    "numpy": "2.4.3",
+    "scipy": "1.17.1",
+    "sklearn": "1.8.0",
+    "networkx": "3.5",
+    "torch_geometric": "2.7.0",
+    "joblib": "1.5.3",
+    "threadpoolctl": "3.8.0"
+  },
+  "banned_packages_importable": [],
+  "git_commit": "e66ee0ba73860b835f6c95311b2c5e02b1222f20",
+  "git_branch": "pilot-rebuild",
+  "git_dirty_tracked_files": [
+    "M gnn_performance.png"
+  ],
+  "git_dirty": true
+}
