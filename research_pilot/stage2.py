@@ -17,6 +17,9 @@ from metrics import (BOOTSTRAP_SEED, PRIMARY, csv_write, evaluate, finite_mean, 
 from pilot import EVENT_ORIGINS, PRIMARY_ORIGINS, labels
 from stage1 import FAMILIAR, HELD_OUT, write_json
 
+STAGE1_TESTS = ("T01", "T02", "T03", "T04", "T05", "T06", "T07", "T08", "T09", "T10",
+                "T10b", "T10c", "T10d")
+
 
 def views(data, manifest, split, origins):
     episodes = {r["id"]: r for r in manifest["episodes"] if r["split"] == split}
@@ -146,9 +149,11 @@ def evaluate_test(data, manifest, out, models):
 
 def run(data, out):
     manifest = json.loads((data / "manifest.json").read_text())
-    checks = json.loads((data / "verification.json").read_text())["tests"]
-    if len(checks) != 11 or set(checks.values()) != {"PASS"} or manifest["config"]["confirmation"] != "E-I-P":
-        raise ValueError("Stage 1 verified E/I/P data required")
+    # Written by: pytest research_pilot/tests --stitch-data <data> --stitch-archive <zip>
+    checks = {t["id"]: t["status"] for t in json.loads((data / "verification.json").read_text())["tests"]}
+    missing = [t for t in STAGE1_TESTS if checks.get(t) != "PASS"]
+    if missing or manifest["config"]["confirmation"] != "E-I-P":
+        raise ValueError(f"Stage 1 verified E/I/P data required; not PASS: {missing}")
     out.mkdir(parents=True, exist_ok=False)
     with threadpool_limits(limits=1):
         models = fit(data, manifest, out)
