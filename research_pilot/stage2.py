@@ -12,7 +12,8 @@ from sklearn.metrics import average_precision_score
 from threadpoolctl import threadpool_limits
 
 from classical import METHODS, Dynamics, adjacency, classifier, columns, design, predict
-from metrics import csv_write, evaluate, finite_mean, reliability, summaries, tie_keys, PRIMARY
+from metrics import (BOOTSTRAP_SEED, PRIMARY, csv_write, evaluate, finite_mean, reliability,
+                     summaries, tie_keys)
 from pilot import EVENT_ORIGINS, PRIMARY_ORIGINS, labels
 from stage1 import FAMILIAR, HELD_OUT, write_json
 
@@ -82,6 +83,8 @@ def fit(data, manifest, out):
         train_graphs=sorted({v.ep["graph"] for v in train}),
         validation_graphs=sorted({v.ep["graph"] for v in valid}),
         conditions=FAMILIAR, primary_origins=PRIMARY_ORIGINS, models=selection,
+        seeds={"tie_break": "[outbreak_seed, origin_t, 773]",
+               "bootstrap": BOOTSTRAP_SEED, "boosted_trees_random_state": 1701},
         data_manifest_sha256=hashlib.sha256((data / "manifest.json").read_bytes()).hexdigest(),
         model_file_sha256=hashlib.sha256((out / "classical_models.joblib").read_bytes()).hexdigest()))
     return models

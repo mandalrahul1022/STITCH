@@ -14,6 +14,14 @@ from topology import betweenness, connected_region, neighbors
 
 FAMILIAR = ("full", "scattered", "random_persistent")
 HELD_OUT = ("bridge_persistent", "degree_matched", "region_persistent")
+# Every NumPy PCG64 stream used by Stage 1, as passed to np.random.default_rng.
+SEED_STREAMS = {
+    "graph": "none: the 24 September edge lists are replayed from the archive and hash-verified",
+    "outbreak": "episode 'seed' field (from the September manifest per graph and beta); the same "
+                "stream draws the 3 initial infected hosts, the 80% reference set and every tick",
+    "mask": "[graph_seed, episode_index, condition_index, 503]; also stored per view as mask_seed",
+    "structured_sets": "[graph_seed, 918]; degree-matched control and region root, test graphs only",
+}
 
 
 def write_json(path, value):
@@ -91,7 +99,8 @@ def run(archive, out):
                        training_masks=FAMILIAR, test_only_masks=HELD_OUT,
                        confirmation="E-I-P", rng="NumPy Generator PCG64",
                        outbreak_seed_source="results/manifest.json inside September ZIP", log_degree="log1p(degree)/log1p(max degree)",
-                       count_window="distinct first events in the union of extended windows"),
+                       count_window="distinct first events in the union of extended windows",
+                       seeds=SEED_STREAMS),
         "graphs": rows, "episodes": records, "views": observations,
     })
 
