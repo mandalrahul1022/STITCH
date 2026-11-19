@@ -8,7 +8,7 @@ import numpy as np
 
 from classical import METHODS, Dynamics, adjacency, columns, design
 from metrics import PRIMARY, evaluate, ranks, tie_keys
-from pilot import EVENT_ORIGINS, labels, features
+from pilot import EVENT_ORIGINS, KNOWN_SCORE, labels, features
 from stage1 import FAMILIAR, HELD_OUT, write_json
 
 
@@ -102,8 +102,8 @@ class OutputChecks(unittest.TestCase):
                 for name in METHODS:
                     s = f[name]
                     self.assertEqual(s.shape, known.shape)
-                    self.assertTrue(np.isfinite(s).all() and (s >= 0).all() and (s <= 1).all())
-                    self.assertTrue((s[known] == 0).all())
+                    self.assertTrue(np.isfinite(s).all() and (s[~known] >= 0).all() and (s <= 1).all())
+                    self.assertTrue((s[known] == KNOWN_SCORE).all())
 
     def test_07_bridge_diagnostic_and_primary_population(self):
         with (self.out / "bridge_prevalence_by_episode.csv").open() as f:

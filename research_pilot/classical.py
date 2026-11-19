@@ -8,7 +8,7 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import StandardScaler
 
-from pilot import E, I, P, S, HORIZON, HISTORY, PRIMARY_ORIGINS
+from pilot import E, I, P, S, HORIZON, HISTORY, KNOWN_SCORE, TRAIN_ORIGINS
 
 MASK_COLUMNS = (4, 5, 12, 13)
 METHODS = ("prevalence", "degree", "observed_neighbor", "mask_only",
@@ -76,7 +76,7 @@ class Dynamics:
             progressed += np.sum((a == E) & ((b == I) | (b == P)))
             infectious += np.sum(a == I)
             removed += np.sum((a == I) & (b == P))
-            starts = np.array(PRIMARY_ORIGINS) - HISTORY + 1
+            starts = np.array(TRAIN_ORIGINS) - HISTORY + 1
             prior += np.bincount(state[starts].ravel(), minlength=4)
         counts = np.concatenate(susceptible)
         y = np.concatenate(events)
@@ -130,4 +130,4 @@ def predict(name, model, x, origins, adj, matrix):
         raw = model.predict_proba(flat[:, columns(name)])[:, 1].reshape(matrix.shape[:2])
     if not np.isfinite(raw).all() or raw.min() < 0 or raw.max() > 1:
         raise ValueError("invalid probability")
-    return np.where(x[list(origins), :, 6] == 1, 0, raw)
+    return np.where(x[list(origins), :, 6] == 1, KNOWN_SCORE, raw)

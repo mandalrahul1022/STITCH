@@ -14,7 +14,7 @@ from threadpoolctl import threadpool_limits
 from classical import METHODS, Dynamics, adjacency, classifier, columns, design, predict
 from metrics import (BOOTSTRAP_SEED, PRIMARY, csv_write, evaluate, finite_mean, reliability,
                      summaries, tie_keys)
-from pilot import EVENT_ORIGINS, PRIMARY_ORIGINS, labels
+from pilot import EVENT_ORIGINS, KNOWN_SCORE, PRIMARY_ORIGINS, TRAIN_ORIGINS, labels
 from stage1 import FAMILIAR, HELD_OUT, write_json
 
 STAGE1_TESTS = ("T01", "T02", "T03", "T04", "T05", "T06", "T07", "T08", "T09", "T10",
@@ -55,10 +55,10 @@ def validation_ap(name, model, valid):
 
 
 def fit(data, manifest, out):
-    train = list(views(data, manifest, "train", PRIMARY_ORIGINS))
+    train = list(views(data, manifest, "train", TRAIN_ORIGINS))
     valid = list(views(data, manifest, "val", PRIMARY_ORIGINS))
     x = np.concatenate([v.matrix.reshape(-1, v.matrix.shape[-1]) for v in train])
-    y = np.concatenate([np.array([labels(v.first, t) for t in PRIMARY_ORIGINS]).ravel()
+    y = np.concatenate([np.array([labels(v.first, t) for t in TRAIN_ORIGINS]).ravel()
                         for v in train])
     models = {"prevalence": float(y.mean()), "fitted_mechanistic": Dynamics.fit(
         (v.x, v.adj) for v in train if v.condition == "full")}
@@ -85,7 +85,7 @@ def fit(data, manifest, out):
     write_json(out / "validation_selection.json", dict(
         train_graphs=sorted({v.ep["graph"] for v in train}),
         validation_graphs=sorted({v.ep["graph"] for v in valid}),
-        conditions=FAMILIAR, primary_origins=PRIMARY_ORIGINS, models=selection,
+        conditions=FAMILIAR, train_origins=TRAIN_ORIGINS, primary_origins=PRIMARY_ORIGINS, models=selection,
         seeds={"tie_break": "[outbreak_seed, origin_t, 773]",
                "bootstrap": BOOTSTRAP_SEED, "boosted_trees_random_state": 1701},
         data_manifest_sha256=hashlib.sha256((data / "manifest.json").read_bytes()).hexdigest(),
@@ -106,8 +106,8 @@ def evaluate_test(data, manifest, out, models):
         scores = {}
         for name in METHODS:
             scores[name] = predict(name, models[name], x, EVENT_ORIGINS, view.adj, view.matrix)
-            if np.any(scores[name][known] != 0):
-                raise ValueError("known host received a nonzero forecast")
+            if np.any(scores[name][known] != KNOWN_SCORE):
+                raise ValueError("known host not ranked below candidates")
             for pop, allowed in (("all", np.ones_like(known)), ("candidate", ~known)):
                 row = dict(graph=e["graph"], episode=e["id"], beta=e["beta"], condition=view.condition,
                            model=name, population=pop)
@@ -115,7 +115,7 @@ def evaluate_test(data, manifest, out, models):
                 keep = allowed & PRIMARY[:, None]
                 bucket = pooled.setdefault((pop, view.condition, name), ([], []))
                 bucket[0].append(y_all[keep])
-                bucket[1].append(scores[name][keep])
+                bucket[1].append(np.clip(scores[name][keep], 0, 1))
         np.savez_compressed(pred_dir / f"{e['id']}_{view.condition}.npz", **scores)
         if view.condition == "bridge_persistent":
             target = np.array([labels(view.first, t) for t in PRIMARY_ORIGINS])

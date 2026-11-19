@@ -10,6 +10,8 @@ HISTORY = 8
 HORIZON = 5
 PRIMARY_ORIGINS = tuple(range(13, 44, 2))
 EVENT_ORIGINS = tuple(range(7, 52, 2))
+TRAIN_ORIGINS = tuple(range(7, 52, 2))  # Spec v1.0.1: fit on 7..51; score and select on PRIMARY_ORIGINS
+KNOWN_SCORE = -1.0  # Spec v1.0.1: observer-known hosts rank strictly below every candidate
 CHANNELS = ("visible_S", "visible_E", "visible_I", "visible_P",
             "available", "age_over_32", "seen_compromised", "normalized_log_degree")
 

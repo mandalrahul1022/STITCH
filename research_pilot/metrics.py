@@ -6,7 +6,7 @@ from sklearn.metrics import average_precision_score, roc_auc_score
 
 from pilot import EVENT_ORIGINS, PRIMARY_ORIGINS, labels
 
-METRICS = ("auc", "ap", "precision_at_budget", "recall_at_budget",
+METRICS = ("auc", "ap", "precision_at_budget", "recall_at_budget", "recall_at_budget_per_origin",
            "late_detection_share", "unique_event_recall", "lead_time", "brier", "ece", "prevalence")
 PRIMARY = np.isin(EVENT_ORIGINS, PRIMARY_ORIGINS)
 RELIABILITY_BINS = 10
@@ -56,6 +56,12 @@ def evaluate(scores, first, allowed, keys):
     selected = chosen & PRIMARY[:, None]
     target, prob = y[primary], scores[primary]
     hits = (selected & y).sum()
+    # Secondary recall (Spec v1.0.1): mean over primary origins of hits/positives, skipping
+    # origins with no positive host; the skipped count is reported alongside.
+    pos_j = (y & primary).sum(axis=1)[PRIMARY]
+    hit_j = (selected & y).sum(axis=1)[PRIMARY]
+    per_origin = hit_j[pos_j > 0] / pos_j[pos_j > 0]
+    calibrated = np.clip(prob, 0, 1)  # known hosts carry KNOWN_SCORE < 0; treat as 0 for Brier/ECE
     warned = chosen & y
     detected = warned.any(axis=0)
     eligible = (y & allowed).any(axis=0)
@@ -65,10 +71,12 @@ def evaluate(scores, first, allowed, keys):
                 ap=average_precision_score(target, prob) if target.any() else np.nan,
                 precision_at_budget=ratio(hits, selected.sum()),
                 recall_at_budget=ratio(hits, target.sum()),
+                recall_at_budget_per_origin=float(per_origin.mean()) if per_origin.size else np.nan,
                 late_detection_share=ratio((selected & prior).sum(), selected.sum()),
                 unique_event_recall=ratio(detected.sum(), eligible.sum()),
                 lead_time=float(lead.mean()) if lead.size else np.nan,
-                brier=np.mean((prob - target)**2), ece=ece(target, prob), prevalence=target.mean(),
+                brier=np.mean((calibrated - target)**2), ece=ece(target, calibrated), prevalence=target.mean(),
+                origins_zero_positive=int((pos_j == 0).sum()),
                 positive_host_origins=int(target.sum()), eligible_host_origins=int(target.size),
                 eligible_unique_events=int(eligible.sum()), warned_unique_events=int(detected.sum()))
 
