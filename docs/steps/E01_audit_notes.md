@@ -280,3 +280,198 @@ What the fixture trace shows:
 - Host 1 goes S to E to I to P inside tick 4. The end-of-tick state history never shows E or I, but `C(v) = 4` is recorded, so the event survives (T02, T08).
 - The queue flag is 0 at every end of tick because the host entered the queue and completed in the same tick.
 - With host 1 hidden at ticks 3 to 5, channel 6 waits until tick 6, the first visible tick, and host 1 stays a candidate at origins 4 and 5.
+## C05 Step A
+
+### Verification
+- Stage 1 T01: PASS
+- Stage 1 T02: PASS
+- Stage 1 T03: PASS
+- Stage 1 T04: PASS
+- Stage 1 T05: PASS
+- Stage 1 T06: PASS
+- Stage 1 T07: PASS
+- Stage 1 T08: PASS
+- Stage 1 T09: PASS
+- Stage 1 T10: PASS
+- Stage 1 T10b: PASS
+- Stage 1 T10c: PASS
+- Stage 1 T10d: PASS
+- Stage 2 test_01_future_event_and_earliest_positive_lead: PASS
+- Stage 2 test_02_candidate_filter_ties_and_budget: PASS
+- Stage 2 test_03_mask_only_and_causal_model_inputs: PASS
+- Stage 2 test_04_filter_mass_and_observed_state: PASS
+- Stage 2 test_05_frozen_splits_and_complete_score_grid: PASS
+- Stage 2 test_06_all_saved_scores_respect_confirmation: PASS
+- Stage 2 test_07_bridge_diagnostic_and_primary_population: PASS
+
+### bridge_persistent candidate prevalence (September 0.0758)
+
+| rule | graph_macro | pooled | positives | eligible |
+|---|---|---|---|---|
+| E/I | 0.0758 | 0.0690 | 3674 | 53284 |
+| E/I/P | 0.0762 | 0.0692 | 3674 | 53112 |
+
+### Population: all
+
+| model | condition | auc new / Sep / Î” | ap new / Sep / Î” | recall_at_budget new / Sep / Î” | late_detection_share new / Sep / Î” | flag |
+|---|---|---|---|---|---|---|
+| boosted_trees | bridge_persistent | 0.7284 / 0.7460 / -0.0176 | 0.1489 / 0.1477 / +0.0012 | 0.1872 / 0.2273 / -0.0401 | 0.2275 / 0.2076 / +0.0199 |  |
+| boosted_trees | degree_matched | 0.7296 / 0.7544 / -0.0248 | 0.1446 / 0.1489 / -0.0043 | 0.1877 / 0.2244 / -0.0367 | 0.2175 / 0.2076 / +0.0099 |  |
+| boosted_trees | full | 0.9027 / 0.9063 / -0.0036 | 0.3024 / 0.3035 / -0.0011 | 0.3253 / 0.3820 / -0.0567 | 0.0000 / 0.0000 / +0.0000 |  |
+| boosted_trees | random_persistent | 0.8295 / 0.8328 / -0.0033 | 0.2237 / 0.2247 / -0.0010 | 0.2757 / 0.3031 / -0.0274 | 0.0376 / 0.0394 / -0.0018 |  |
+| boosted_trees | region_persistent | 0.7830 / 0.7927 / -0.0097 | 0.1936 / 0.1941 / -0.0005 | 0.2462 / 0.2977 / -0.0515 | 0.0763 / 0.0559 / +0.0204 |  |
+| boosted_trees | scattered | 0.8874 / 0.8809 / +0.0065 | 0.2729 / 0.2570 / +0.0159 | 0.3092 / 0.3278 / -0.0186 | 0.0406 / 0.0352 / +0.0054 |  |
+| degree | bridge_persistent | 0.6484 / 0.6485 / -0.0001 | 0.0837 / 0.0837 / -0.0000 | 0.1024 / 0.1120 / -0.0096 | 0.4020 / 0.3975 / +0.0045 |  |
+| degree | degree_matched | 0.6481 / 0.6503 / -0.0022 | 0.0834 / 0.0840 / -0.0006 | 0.1024 / 0.1119 / -0.0095 | 0.4023 / 0.4023 / +0.0000 |  |
+| degree | full | 0.7270 / 0.7270 / +0.0000 | 0.1379 / 0.1379 / +0.0000 | 0.1615 / 0.1925 / -0.0310 | 0.0000 / 0.0000 / +0.0000 |  |
+| degree | random_persistent | 0.6816 / 0.6819 / -0.0003 | 0.1013 / 0.1017 / -0.0004 | 0.1270 / 0.1426 / -0.0156 | 0.2323 / 0.2533 / -0.0210 |  |
+| degree | region_persistent | 0.6681 / 0.6684 / -0.0003 | 0.0917 / 0.0909 / +0.0008 | 0.1118 / 0.1199 / -0.0081 | 0.3462 / 0.3642 / -0.0180 |  |
+| degree | scattered | 0.7227 / 0.7229 / -0.0002 | 0.1333 / 0.1329 / +0.0004 | 0.1560 / 0.1888 / -0.0328 | 0.0282 / 0.0270 / +0.0012 |  |
+| fitted_mechanistic | bridge_persistent | 0.7895 / 0.7886 / +0.0009 | 0.1714 / 0.1767 / -0.0053 | 0.2058 / 0.2224 / -0.0166 | 0.1508 / 0.1307 / +0.0201 |  |
+| fitted_mechanistic | degree_matched | 0.7964 / 0.7992 / -0.0028 | 0.1711 / 0.1755 / -0.0044 | 0.1856 / 0.2236 / -0.0380 | 0.1484 / 0.1220 / +0.0264 |  |
+| fitted_mechanistic | full | 0.9146 / 0.9146 / +0.0000 | 0.3135 / 0.3135 / +0.0000 | 0.3295 / 0.3674 / -0.0379 | 0.0000 / 0.0000 / +0.0000 |  |
+| fitted_mechanistic | random_persistent | 0.8604 / 0.8525 / +0.0079 | 0.2352 / 0.2383 / -0.0031 | 0.2798 / 0.2933 / -0.0135 | 0.0279 / 0.0303 / -0.0024 |  |
+| fitted_mechanistic | region_persistent | 0.8236 / 0.8256 / -0.0020 | 0.2038 / 0.2094 / -0.0056 | 0.2358 / 0.2881 / -0.0523 | 0.0730 / 0.0463 / +0.0267 |  |
+| fitted_mechanistic | scattered | 0.9057 / 0.9058 / -0.0001 | 0.2940 / 0.2924 / +0.0016 | 0.3242 / 0.3667 / -0.0425 | 0.0370 / 0.0334 / +0.0036 |  |
+| logistic | bridge_persistent | 0.6496 / 0.7197 / -0.0701 | 0.1117 / 0.1280 / -0.0163 | 0.1649 / 0.1989 / -0.0340 | 0.3837 / 0.3032 / +0.0805 | auc -0.0701 |
+| logistic | degree_matched | 0.6536 / 0.7388 / -0.0852 | 0.1068 / 0.1220 / -0.0152 | 0.1504 / 0.2021 / -0.0517 | 0.3918 / 0.2987 / +0.0931 | auc -0.0852 |
+| logistic | full | 0.8913 / 0.9030 / -0.0117 | 0.2975 / 0.2889 / +0.0086 | 0.3250 / 0.3737 / -0.0487 | 0.0000 / 0.0000 / +0.0000 |  |
+| logistic | random_persistent | 0.7909 / 0.8062 / -0.0153 | 0.1765 / 0.1833 / -0.0068 | 0.2337 / 0.2614 / -0.0277 | 0.2542 / 0.2118 / +0.0424 |  |
+| logistic | region_persistent | 0.6850 / 0.7654 / -0.0804 | 0.1497 / 0.1599 / -0.0102 | 0.1952 / 0.2546 / -0.0594 | 0.2127 / 0.2166 / -0.0039 | auc -0.0804 |
+| logistic | scattered | 0.8516 / 0.8775 / -0.0259 | 0.2509 / 0.2413 / +0.0096 | 0.2954 / 0.3204 / -0.0250 | 0.0418 / 0.0343 / +0.0075 |  |
+| mask_only | bridge_persistent | 0.6088 / 0.6199 / -0.0111 | 0.0836 / 0.0865 / -0.0029 | 0.0725 / 0.0611 / +0.0114 | 0.1016 / 0.2169 / -0.1153 |  |
+| mask_only | degree_matched | 0.6024 / 0.6151 / -0.0127 | 0.0844 / 0.0869 / -0.0025 | 0.0700 / 0.0687 / +0.0013 | 0.1055 / 0.2112 / -0.1057 |  |
+| mask_only | full | 0.6543 / 0.6543 / +0.0000 | 0.0973 / 0.0973 / -0.0000 | 0.0743 / 0.1484 / -0.0741 | 0.0000 / 0.0000 / +0.0000 |  |
+| mask_only | random_persistent | 0.6004 / 0.5971 / +0.0033 | 0.0822 / 0.0748 / +0.0074 | 0.0642 / 0.0375 / +0.0267 | 0.0793 / 0.1608 / -0.0815 |  |
+| mask_only | region_persistent | 0.6238 / 0.6205 / +0.0033 | 0.0850 / 0.0819 / +0.0031 | 0.0810 / 0.0703 / +0.0107 | 0.0968 / 0.2767 / -0.1799 |  |
+| mask_only | scattered | 0.6502 / 0.6458 / +0.0044 | 0.0960 / 0.0955 / +0.0005 | 0.0780 / 0.0706 / +0.0074 | 0.0592 / 0.0325 / +0.0267 |  |
+| observed_neighbor | bridge_persistent | 0.6577 / 0.5815 / +0.0762 | 0.0942 / 0.0791 / +0.0151 | 0.1528 / 0.1690 / -0.0162 | 0.4534 / 0.4787 / -0.0253 | auc +0.0762 |
+| observed_neighbor | degree_matched | 0.6534 / 0.6007 / +0.0527 | 0.0912 / 0.0845 / +0.0067 | 0.1393 / 0.1864 / -0.0471 | 0.4546 / 0.4799 / -0.0253 | auc +0.0527 |
+| observed_neighbor | full | 0.8885 / 0.8872 / +0.0013 | 0.2630 / 0.2741 / -0.0111 | 0.3270 / 0.3789 / -0.0519 | 0.0000 / 0.0000 / +0.0000 |  |
+| observed_neighbor | random_persistent | 0.7696 / 0.7214 / +0.0482 | 0.1398 / 0.1293 / +0.0105 | 0.2184 / 0.2388 / -0.0204 | 0.3555 / 0.3675 / -0.0120 | auc +0.0482 |
+| observed_neighbor | region_persistent | 0.6910 / 0.6574 / +0.0336 | 0.1156 / 0.1144 / +0.0012 | 0.1764 / 0.2270 / -0.0506 | 0.2909 / 0.3233 / -0.0324 | auc +0.0336 |
+| observed_neighbor | scattered | 0.8114 / 0.7540 / +0.0574 | 0.2009 / 0.1859 / +0.0150 | 0.2851 / 0.3173 / -0.0322 | 0.0451 / 0.0409 / +0.0042 | auc +0.0574 |
+| prevalence | bridge_persistent | 0.6023 / 0.6010 / +0.0013 | 0.0762 / 0.0758 / +0.0004 | 0.0607 / 0.0883 / -0.0276 | 0.1457 / 0.3131 / -0.1674 |  |
+| prevalence | degree_matched | 0.6018 / 0.6028 / -0.0010 | 0.0760 / 0.0763 / -0.0003 | 0.0613 / 0.0856 / -0.0243 | 0.1448 / 0.3263 / -0.1815 |  |
+| prevalence | full | 0.6543 / 0.6543 / +0.0000 | 0.0973 / 0.0973 / -0.0000 | 0.0743 / 0.1484 / -0.0741 | 0.0000 / 0.0000 / +0.0000 |  |
+| prevalence | random_persistent | 0.6101 / 0.6104 / -0.0003 | 0.0775 / 0.0781 / -0.0006 | 0.0613 / 0.1038 / -0.0425 | 0.1265 / 0.2272 / -0.1007 |  |
+| prevalence | region_persistent | 0.6046 / 0.6049 / -0.0003 | 0.0775 / 0.0767 / +0.0008 | 0.0600 / 0.0904 / -0.0304 | 0.1391 / 0.3194 / -0.1803 |  |
+| prevalence | scattered | 0.6500 / 0.6503 / -0.0003 | 0.0951 / 0.0953 / -0.0002 | 0.0729 / 0.1463 / -0.0734 | 0.0150 / 0.0228 / -0.0078 |  |
+
+Flagged cells (|Î”AP|>0.02 or |Î”AUC|>0.03): 8
+- logistic / bridge_persistent: auc -0.0701
+- logistic / degree_matched: auc -0.0852
+- logistic / region_persistent: auc -0.0804
+- observed_neighbor / bridge_persistent: auc +0.0762
+- observed_neighbor / degree_matched: auc +0.0527
+- observed_neighbor / random_persistent: auc +0.0482
+- observed_neighbor / region_persistent: auc +0.0336
+- observed_neighbor / scattered: auc +0.0574
+
+### Population: candidate
+
+| model | condition | auc new / Sep / Î” | ap new / Sep / Î” | recall_at_budget new / Sep / Î” | late_detection_share new / Sep / Î” | flag |
+|---|---|---|---|---|---|---|
+| boosted_trees | bridge_persistent | 0.6532 / 0.7460 / -0.0928 | 0.1489 / 0.1477 / +0.0012 | 0.1872 / 0.2273 / -0.0401 | 0.2275 / 0.2076 / +0.0199 | auc -0.0928 |
+| boosted_trees | degree_matched | 0.6560 / 0.7544 / -0.0984 | 0.1446 / 0.1489 / -0.0043 | 0.1877 / 0.2244 / -0.0367 | 0.2175 / 0.2076 / +0.0099 | auc -0.0984 |
+| boosted_trees | full | 0.8428 / 0.9063 / -0.0635 | 0.3024 / 0.3035 / -0.0011 | 0.3253 / 0.3820 / -0.0567 | 0.0000 / 0.0000 / +0.0000 | auc -0.0635 |
+| boosted_trees | random_persistent | 0.7740 / 0.8328 / -0.0588 | 0.2237 / 0.2247 / -0.0010 | 0.2757 / 0.3031 / -0.0274 | 0.0376 / 0.0394 / -0.0018 | auc -0.0588 |
+| boosted_trees | region_persistent | 0.7204 / 0.7927 / -0.0723 | 0.1936 / 0.1941 / -0.0005 | 0.2462 / 0.2977 / -0.0515 | 0.0763 / 0.0559 / +0.0204 | auc -0.0723 |
+| boosted_trees | scattered | 0.8211 / 0.8809 / -0.0598 | 0.2729 / 0.2570 / +0.0159 | 0.3092 / 0.3278 / -0.0186 | 0.0406 / 0.0352 / +0.0054 | auc -0.0598 |
+| degree | bridge_persistent | 0.5479 / 0.6485 / -0.1006 | 0.0837 / 0.0837 / -0.0000 | 0.1024 / 0.1120 / -0.0096 | 0.4020 / 0.3975 / +0.0045 | auc -0.1006 |
+| degree | degree_matched | 0.5482 / 0.6503 / -0.1021 | 0.0834 / 0.0840 / -0.0006 | 0.1024 / 0.1119 / -0.0095 | 0.4023 / 0.4023 / +0.0000 | auc -0.1021 |
+| degree | full | 0.6016 / 0.7270 / -0.1254 | 0.1379 / 0.1379 / +0.0000 | 0.1615 / 0.1925 / -0.0310 | 0.0000 / 0.0000 / +0.0000 | auc -0.1254 |
+| degree | random_persistent | 0.5878 / 0.6819 / -0.0941 | 0.1013 / 0.1017 / -0.0004 | 0.1270 / 0.1426 / -0.0156 | 0.2323 / 0.2533 / -0.0210 | auc -0.0941 |
+| degree | region_persistent | 0.5742 / 0.6684 / -0.0942 | 0.0917 / 0.0909 / +0.0008 | 0.1118 / 0.1199 / -0.0081 | 0.3462 / 0.3642 / -0.0180 | auc -0.0942 |
+| degree | scattered | 0.5999 / 0.7229 / -0.1230 | 0.1333 / 0.1329 / +0.0004 | 0.1560 / 0.1888 / -0.0328 | 0.0282 / 0.0270 / +0.0012 | auc -0.1230 |
+| fitted_mechanistic | bridge_persistent | 0.7256 / 0.7886 / -0.0630 | 0.1714 / 0.1767 / -0.0053 | 0.2058 / 0.2224 / -0.0166 | 0.1508 / 0.1307 / +0.0201 | auc -0.0630 |
+| fitted_mechanistic | degree_matched | 0.7352 / 0.7992 / -0.0640 | 0.1711 / 0.1755 / -0.0044 | 0.1856 / 0.2236 / -0.0380 | 0.1484 / 0.1220 / +0.0264 | auc -0.0640 |
+| fitted_mechanistic | full | 0.8608 / 0.9146 / -0.0538 | 0.3135 / 0.3135 / +0.0000 | 0.3295 / 0.3674 / -0.0379 | 0.0000 / 0.0000 / +0.0000 | auc -0.0538 |
+| fitted_mechanistic | random_persistent | 0.8130 / 0.8525 / -0.0395 | 0.2352 / 0.2383 / -0.0031 | 0.2798 / 0.2933 / -0.0135 | 0.0279 / 0.0303 / -0.0024 | auc -0.0395 |
+| fitted_mechanistic | region_persistent | 0.7709 / 0.8256 / -0.0547 | 0.2038 / 0.2094 / -0.0056 | 0.2358 / 0.2881 / -0.0523 | 0.0730 / 0.0463 / +0.0267 | auc -0.0547 |
+| fitted_mechanistic | scattered | 0.8488 / 0.9058 / -0.0570 | 0.2940 / 0.2924 / +0.0016 | 0.3242 / 0.3667 / -0.0425 | 0.0370 / 0.0334 / +0.0036 | auc -0.0570 |
+| logistic | bridge_persistent | 0.5606 / 0.7197 / -0.1591 | 0.1117 / 0.1280 / -0.0163 | 0.1649 / 0.1989 / -0.0340 | 0.3837 / 0.3032 / +0.0805 | auc -0.1591 |
+| logistic | degree_matched | 0.5672 / 0.7388 / -0.1716 | 0.1068 / 0.1220 / -0.0152 | 0.1504 / 0.2021 / -0.0517 | 0.3918 / 0.2987 / +0.0931 | auc -0.1716 |
+| logistic | full | 0.8282 / 0.9030 / -0.0748 | 0.2975 / 0.2889 / +0.0086 | 0.3250 / 0.3737 / -0.0487 | 0.0000 / 0.0000 / +0.0000 | auc -0.0748 |
+| logistic | random_persistent | 0.7263 / 0.8062 / -0.0799 | 0.1765 / 0.1833 / -0.0068 | 0.2337 / 0.2614 / -0.0277 | 0.2542 / 0.2118 / +0.0424 | auc -0.0799 |
+| logistic | region_persistent | 0.6106 / 0.7654 / -0.1548 | 0.1497 / 0.1599 / -0.0102 | 0.1952 / 0.2546 / -0.0594 | 0.2127 / 0.2166 / -0.0039 | auc -0.1548 |
+| logistic | scattered | 0.7753 / 0.8775 / -0.1022 | 0.2509 / 0.2413 / +0.0096 | 0.2954 / 0.3204 / -0.0250 | 0.0418 / 0.0343 / +0.0075 | auc -0.1022 |
+| mask_only | bridge_persistent | 0.5146 / 0.6199 / -0.1053 | 0.0836 / 0.0865 / -0.0029 | 0.0725 / 0.0611 / +0.0114 | 0.1016 / 0.2169 / -0.1153 | auc -0.1053 |
+| mask_only | degree_matched | 0.5085 / 0.6151 / -0.1066 | 0.0844 / 0.0869 / -0.0025 | 0.0700 / 0.0687 / +0.0013 | 0.1055 / 0.2112 / -0.1057 | auc -0.1066 |
+| mask_only | full | 0.5000 / 0.6543 / -0.1543 | 0.0973 / 0.0973 / -0.0000 | 0.0743 / 0.1484 / -0.0741 | 0.0000 / 0.0000 / +0.0000 | auc -0.1543 |
+| mask_only | random_persistent | 0.4948 / 0.5971 / -0.1023 | 0.0822 / 0.0748 / +0.0074 | 0.0642 / 0.0375 / +0.0267 | 0.0793 / 0.1608 / -0.0815 | auc -0.1023 |
+| mask_only | region_persistent | 0.5274 / 0.6205 / -0.0931 | 0.0850 / 0.0819 / +0.0031 | 0.0810 / 0.0703 / +0.0107 | 0.0968 / 0.2767 / -0.1799 | auc -0.0931 |
+| mask_only | scattered | 0.5014 / 0.6458 / -0.1444 | 0.0960 / 0.0955 / +0.0005 | 0.0780 / 0.0706 / +0.0074 | 0.0592 / 0.0325 / +0.0267 | auc -0.1444 |
+| observed_neighbor | bridge_persistent | 0.5613 / 0.5815 / -0.0202 | 0.0942 / 0.0791 / +0.0151 | 0.1528 / 0.1690 / -0.0162 | 0.4534 / 0.4787 / -0.0253 |  |
+| observed_neighbor | degree_matched | 0.5573 / 0.6007 / -0.0434 | 0.0912 / 0.0845 / +0.0067 | 0.1393 / 0.1864 / -0.0471 | 0.4546 / 0.4799 / -0.0253 | auc -0.0434 |
+| observed_neighbor | full | 0.8235 / 0.8872 / -0.0637 | 0.2630 / 0.2741 / -0.0111 | 0.3270 / 0.3789 / -0.0519 | 0.0000 / 0.0000 / +0.0000 | auc -0.0637 |
+| observed_neighbor | random_persistent | 0.6947 / 0.7214 / -0.0267 | 0.1398 / 0.1293 / +0.0105 | 0.2184 / 0.2388 / -0.0204 | 0.3555 / 0.3675 / -0.0120 |  |
+| observed_neighbor | region_persistent | 0.6078 / 0.6574 / -0.0496 | 0.1156 / 0.1144 / +0.0012 | 0.1764 / 0.2270 / -0.0506 | 0.2909 / 0.3233 / -0.0324 | auc -0.0496 |
+| observed_neighbor | scattered | 0.7197 / 0.7540 / -0.0343 | 0.2009 / 0.1859 / +0.0150 | 0.2851 / 0.3173 / -0.0322 | 0.0451 / 0.0409 / +0.0042 | auc -0.0343 |
+| prevalence | bridge_persistent | 0.5000 / 0.6010 / -0.1010 | 0.0762 / 0.0758 / +0.0004 | 0.0607 / 0.0883 / -0.0276 | 0.1457 / 0.3131 / -0.1674 | auc -0.1010 |
+| prevalence | degree_matched | 0.5000 / 0.6028 / -0.1028 | 0.0760 / 0.0763 / -0.0003 | 0.0613 / 0.0856 / -0.0243 | 0.1448 / 0.3263 / -0.1815 | auc -0.1028 |
+| prevalence | full | 0.5000 / 0.6543 / -0.1543 | 0.0973 / 0.0973 / -0.0000 | 0.0743 / 0.1484 / -0.0741 | 0.0000 / 0.0000 / +0.0000 | auc -0.1543 |
+| prevalence | random_persistent | 0.5000 / 0.6104 / -0.1104 | 0.0775 / 0.0781 / -0.0006 | 0.0613 / 0.1038 / -0.0425 | 0.1265 / 0.2272 / -0.1007 | auc -0.1104 |
+| prevalence | region_persistent | 0.5000 / 0.6049 / -0.1049 | 0.0775 / 0.0767 / +0.0008 | 0.0600 / 0.0904 / -0.0304 | 0.1391 / 0.3194 / -0.1803 | auc -0.1049 |
+| prevalence | scattered | 0.5000 / 0.6503 / -0.1503 | 0.0951 / 0.0953 / -0.0002 | 0.0729 / 0.1463 / -0.0734 | 0.0150 / 0.0228 / -0.0078 | auc -0.1503 |
+
+Flagged cells (|Î”AP|>0.02 or |Î”AUC|>0.03): 40
+- boosted_trees / bridge_persistent: auc -0.0928
+- boosted_trees / degree_matched: auc -0.0984
+- boosted_trees / full: auc -0.0635
+- boosted_trees / random_persistent: auc -0.0588
+- boosted_trees / region_persistent: auc -0.0723
+- boosted_trees / scattered: auc -0.0598
+- degree / bridge_persistent: auc -0.1006
+- degree / degree_matched: auc -0.1021
+- degree / full: auc -0.1254
+- degree / random_persistent: auc -0.0941
+- degree / region_persistent: auc -0.0942
+- degree / scattered: auc -0.1230
+- fitted_mechanistic / bridge_persistent: auc -0.0630
+- fitted_mechanistic / degree_matched: auc -0.0640
+- fitted_mechanistic / full: auc -0.0538
+- fitted_mechanistic / random_persistent: auc -0.0395
+- fitted_mechanistic / region_persistent: auc -0.0547
+- fitted_mechanistic / scattered: auc -0.0570
+- logistic / bridge_persistent: auc -0.1591
+- logistic / degree_matched: auc -0.1716
+- logistic / full: auc -0.0748
+- logistic / random_persistent: auc -0.0799
+- logistic / region_persistent: auc -0.1548
+- logistic / scattered: auc -0.1022
+- mask_only / bridge_persistent: auc -0.1053
+- mask_only / degree_matched: auc -0.1066
+- mask_only / full: auc -0.1543
+- mask_only / random_persistent: auc -0.1023
+- mask_only / region_persistent: auc -0.0931
+- mask_only / scattered: auc -0.1444
+- observed_neighbor / degree_matched: auc -0.0434
+- observed_neighbor / full: auc -0.0637
+- observed_neighbor / region_persistent: auc -0.0496
+- observed_neighbor / scattered: auc -0.0343
+- prevalence / bridge_persistent: auc -0.1010
+- prevalence / degree_matched: auc -0.1028
+- prevalence / full: auc -0.1543
+- prevalence / random_persistent: auc -0.1104
+- prevalence / region_persistent: auc -0.1049
+- prevalence / scattered: auc -0.1503
+
+Required rows present: fitted_mechanistic/full=yes, fitted_mechanistic/bridge_persistent=yes, boosted_trees/full=yes, boosted_trees/bridge_persistent=yes
+
+### C05 notes
+
+Run on Windows with `stage2.py --data results/stage1/run_a --out results/stage2/run_a`, then `verify_classical.py` and `tools/compare_september.py`. No code was changed to close a gap.
+
+September's log is the all-host population. On candidates, prevalence AUC is 0.5 by construction, while September reports 0.60 to 0.65. So the all-host table above is the comparison, and the candidate table is for reference only. Every all-host value matches the earlier Linux Step A (Stitchnotes/STITCH_Step_A_Sanity_Check.md) to 4 decimals.
+
+### C05 flag causes (all-host, 8 flags)
+
+| Flag | Cause in code |
+|---|---|
+| observed_neighbor, all 5 masked conditions, AUC +0.034 to +0.076 | Feature definition and candidate rule. `classical.columns` uses column 17 only, the count of currently visible I neighbours, passed through a logistic fit (P = 0.045 at zero count). The E/I/P gate in `classical.predict` sets known hosts to 0, so unknown positives with zero exposure outrank known negatives instead of tying with them. The measured tie effect (0.043 to 0.079) is the same size as each gap. Bridge and region host sets also differ from September (88 to 93 and 30 to 82 of 102 hosts shared). |
+| logistic, bridge / degree_matched / region, AUC -0.070 to -0.085 | Feature definition. `classical.design` builds 22 inputs (8 current, 8 window means, 6 neighbour sums) from 294,912 rows. September's scaler had 32 inputs and 423,936 rows, so the inputs differ before any masking. Persistent structural masks change the neighbour-sum features most. |
+
+Not flagged but systematic: recall_at_budget is lower in every row (up to -0.074). The aggregation order differs: the rebuild pools hits over primary origins within each outbreak, while September used a per-origin denominator (episode 3000_0 check: 0.2789 vs 0.3327). The late share for prevalence and mask_only is lower because of the tie rule: shared seeded permutations here, September's rule unknown.
+
+Accept: every flag has a code cause; no code changed to close a gap; fitted_mechanistic and boosted_trees rows are present for full and bridge_persistent.
